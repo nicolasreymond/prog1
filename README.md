@@ -15,3 +15,22 @@ Pour compiler tous les exercices et labos, exécutez :
 
 ```sh
 make
+```
+
+Pour nettoyer les fichiers compilés, exécutez :
+
+```sh
+make clean
+```
+
+Pour compiler un exercice spécifique, exécutez :
+
+```sh
+make -C exercises/<nom_exercice>
+```
+
+Pour compiler un labo spécifique, exécutez :
+
+```sh
+make -C labos/<nom_labo>
+```
