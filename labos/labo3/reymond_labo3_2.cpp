@@ -2,7 +2,7 @@
  * @file    reymond_labo3.cpp
  * @author  Nicolas Reymond (nicolas.reymond@heig-vd.ch)
  * @brief   Programme qui calcule la durée entre deux heures
- * @version 1.0
+ * @version 1.1
  * @date    2024-09-19
  *
  * @copyright Copyright (c) 2024
