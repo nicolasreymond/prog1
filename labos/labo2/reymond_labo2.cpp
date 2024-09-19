@@ -2,8 +2,8 @@
  * @file reymond_labo2.cpp
  * @author Nicolas Reymond (nicolas.reymond@heig-vd.ch)
  * @brief Programme qui convertit un nombre de secondes en semaines, jours, heures, minutes et secondes
- * @version 1.0
- * @date 2024-09-26
+ * @version 1.2
+ * @date 2024-09-14
  *
  * @copyright Copyright (c) 2024
  *
