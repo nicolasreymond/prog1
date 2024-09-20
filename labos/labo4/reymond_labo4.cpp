@@ -1,9 +1,9 @@
 /**
- * @file    reymond_laboX.cpp
+ * @file    reymond_labo4.cpp
  * @author  Nicolas Reymond (nicolas.reymond@heig-vd.ch)
- * @brief   
+ * @brief   Programme qui convertit un angle en dixièmes de degré en minutes et secondes
  * @version 1.0
- * @date    2024-xx-xx
+ * @date    20-09-2024
  *
  * @copyright Copyright (c) 2024
  *
