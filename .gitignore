@@ -39,3 +39,6 @@ __pycache__/
 .env
 
 labo0
+
+#accept configure file
+!configure

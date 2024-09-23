@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Configuration script for the project
+
+# Set project directory from environment variable or use default
+PROJECT_DIR="${PROJECT_DIR:-/home/nreymond/dev/heig-vd/prog1}"
+
+# Set environment variables from input or use default
+PROJECT_ENV="${PROJECT_ENV:-development}"
+PROJECT_DEBUG="${PROJECT_DEBUG:-true}"
+
+# Export environment variables
+export PROJECT_ENV
+export PROJECT_DEBUG
+
+# Print configuration
+echo "Project Directory: $PROJECT_DIR"
+echo "Environment: $PROJECT_ENV"
+echo "Debug Mode: $PROJECT_DEBUG"
+
+# Additional configuration commands can be added here
+
+echo "Configuration complete."
