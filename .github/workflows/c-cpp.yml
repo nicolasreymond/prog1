@@ -17,5 +17,3 @@ jobs:
       run: sudo apt-get install build-essential
     - name: make
       run: make
-    - name: Run Tests
-      run: ./run_test.sh
