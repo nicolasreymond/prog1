@@ -23,7 +23,7 @@ build/
 Thumbs.db
 
 # Ignore IDE specific files
-.vscode/
+vscode/
 .idea/
 
 # Ignore compiled files
