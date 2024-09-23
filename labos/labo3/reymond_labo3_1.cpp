@@ -1,5 +1,5 @@
 /**
- * @file    reymond_labo3.cpp
+ * @file    reymond_labo3_1.cpp
  * @author  Nicolas Reymond (nicolas.reymond@heig-vd.ch)
  * @brief   Programme qui additionne deux longueurs en km, m, cm et mm
  * @version 1.0
