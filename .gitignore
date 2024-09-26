@@ -39,3 +39,6 @@ __pycache__/
 .env
 
 labo0
+
+# Ignore PRG1_Recueil_Exercices
+PRG1_Recueil_Exercices/
