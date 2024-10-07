@@ -62,4 +62,5 @@ int main(){
     {
         cout << "Le quadrilatère n'est aucune de ces formes\n";
     }
+    return 0;
 }
