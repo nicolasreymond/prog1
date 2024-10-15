@@ -8,25 +8,26 @@
  * @copyright Copyright (c) 2024
  *
  */
-
 #include <iostream>
 #include <random>
-#include <climits> // for INT_MAX
+// for INT_MAX
+#include <climits> 
+
 using namespace std;
 
 // Function to estimate the value of Pi
 double estimatePi(int numDraws)
 {
     int insideCircle = 0;
-    random_device rd;                          // Random number generator
-    mt19937 gen(rd());                         // Initialization with a random seed
-    uniform_real_distribution<> dis(0.0, 1.0); // Uniform distribution [0,1)
+    random_device rd;                          
+    mt19937 gen(rd());                         
+    uniform_real_distribution<> dis(0.0, 1.0); 
 
     // Drawing random points in the unit square
     for (int i = 0; i < numDraws; ++i)
     {
-        double x = dis(gen); // Random x coordinate
-        double y = dis(gen); // Random y coordinate
+        double x = dis(gen); 
+        double y = dis(gen); 
         // Check if the point is in the quarter circle
         if (x * x + y * y <= 1.0)
         {

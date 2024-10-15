@@ -53,7 +53,8 @@ int main(){
         cout << "Le quadrilatère est un parallélogramme\n";
     }
     // Check for trapezoid (one pair of parallel sides)
-    else if ((x2 - x1) * (y4 - y3) == (y2 - y1) * (x4 - x3) || (x3 - x2) * (y1 - y4) == (y3 - y2) * (x1 - x4))
+    else if ((x2 - x1) * (y3 - y2) == (y2 - y1) * (x3 - x2) || (x3 - x2) * (y4 - y3) == (y3 - y2) * (x4 - x3) ||
+             (x4 - x3) * (y1 - y4) == (y4 - y3) * (x1 - x4) || (x1 - x4) * (y2 - y1) == (y1 - y4) * (x2 - x1))
     {
         cout << "Le quadrilatère est un trapèze\n";
     }

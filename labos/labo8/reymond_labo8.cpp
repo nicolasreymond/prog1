@@ -23,7 +23,7 @@ void drawNestedSquares(int n) {
 
             // If drawing the central square
             if (n % 2 == 1 && i == j && i == size / 2) {
-                cout << "■";
+                cout << "■ ";
                 continue;
             }
 
@@ -31,26 +31,26 @@ void drawNestedSquares(int n) {
             if (minDist % 2 == 0) {
                 if (i == minDist && j == minDist) {
                     // Top left corner
-                    cout << "┌";
+                    cout << "┌─";
                 } else if (i == minDist && j == size - 1 - minDist) {
                     // Top right corner
-                    cout << "┐";
+                    cout << "┐ ";
                 } else if (i == size - 1 - minDist && j == minDist) {
                     // Bottom left corner
-                    cout << "└";
+                    cout << "└─";
                 } else if (i == size - 1 - minDist && j == size - 1 - minDist) {
                     // Bottom right corner
-                    cout << "┘";
+                    cout << "┘ ";
                 } else if (i == minDist || i == size - 1 - minDist) {
                     // Horizontal lines
-                    cout << "─";
+                    cout << "──";
                 } else if (j == minDist || j == size - 1 - minDist) {
                     // Vertical lines
-                    cout << "│";
+                    cout << "│ ";
                 }
             } else {
                 // Spaces between squares
-                cout << " ";
+                cout << "  ";
             }
         }
         cout << endl;

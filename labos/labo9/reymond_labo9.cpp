@@ -1,7 +1,7 @@
 /**
  * @file    reymond_labo9.cpp
  * @author  Nicolas Reymond (nicolas.reymond@heig-vd.ch)
- * @brief   
+ * @brief   Syracuse sequence and number of steps to reach 1
  * @version 1.0
  * @date    07.10.2024
  *
@@ -52,7 +52,7 @@ int main()
         cout << "Please enter a positive number." << endl;
         return 1;
     }
-    
+
     syracuse(n);
     syracuseSteps(n);
 
