@@ -5,6 +5,7 @@
 
 struct Rationnel{int num; int den;};
 Rationnel simplifier(Rationnel r);
+void afficher(const Rationnel &r);
 
 // Opérateurs arithmétiques
 Rationnel operator-(const Rationnel & r);
@@ -12,10 +13,13 @@ Rationnel & operator+=(Rationnel & gauche, const Rationnel & droit);
 Rationnel operator+(Rationnel gauche, const Rationnel & droit);
 Rationnel & operator-=(Rationnel & gauche, const Rationnel & droit);
 Rationnel operator-(Rationnel gauche, const Rationnel & droit);
-Rationnel operator/(const Rationnel & gauche, int facteur);
+Rationnel operator/(const Rationnel & gauche, const Rationnel & droit);
+Rationnel & operator/=(Rationnel & gauche, const Rationnel & droit);
 Rationnel operator*(const Rationnel & gauche, const Rationnel & droit);
-Rationnel operator<(const Rationnel & gauche, const Rationnel & droit);
-Rationnel operator>(const Rationnel & gauche, const Rationnel & droit);
-Rationnel operator==(const Rationnel & gauche, const Rationnel & droit);
-Rationnel operator!=(const Rationnel & gauche, const Rationnel & droit);
+bool operator==(const Rationnel& gauche, const Rationnel& droit);
+bool operator!=(const Rationnel& gauche, const Rationnel& droit);
+bool operator<(const Rationnel& gauche, const Rationnel& droit);
+bool operator<=(const Rationnel& gauche, const Rationnel& droit);
+bool operator>(const Rationnel& gauche, const Rationnel& droit);
+bool operator>=(const Rationnel& gauche, const Rationnel& droit);
 std::ostream &operator<<(std::ostream &os, const Rationnel &r);

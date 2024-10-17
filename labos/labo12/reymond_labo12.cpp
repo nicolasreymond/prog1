@@ -10,65 +10,104 @@
  */
 
 #include <iostream>
+#include <stdexcept> // For exception messages
 #include "Rationnel.hpp"
+
 using namespace std;
 
 int main() {
     // Declare variables for numerator and denominator
-    int num1, den1, num2, den2;
+    int numerator1, denominator1, numerator2, denominator2;
 
-    // Test for operator-
-    num1 = 3; den1 = 4;
-    num2 = 1; den2 = 4;
-    Rationnel r2 = {num2, den2};
-    cout << "Testing operator-: " << (Rationnel{num1, den1} - Rationnel{num2, den2}) << endl;
+    // Input first rational number
+    Rationnel rational1 = Rationnel{numerator1, denominator1};
+    Rationnel rational2 = Rationnel{numerator2, denominator2};
+    
+    cout << "Enter numerator and denominator for first rational number: ";
+    cin >> numerator1 >> denominator1;
 
-    // Test for operator+=
-    Rationnel r1{1, 2};
-    num1 = 1; den1 = 4;
-    r1 += Rationnel{num1, den1};
-    cout << "Testing operator+=: " << r1 << endl;
+    // Input second rational number
+    cout << "Enter numerator and denominator for second rational number: ";
+    cin >> numerator2 >> denominator2;
 
-    // Test for operator+
-    num1 = 1; den1 = 2;
-    num2 = 1; den2 = 4;
-    cout << "Testing operator+: " << (Rationnel{num1, den1} + Rationnel{num2, den2}) << endl;
+    // Test all operators
+    // Addition
+    Rationnel result = rational1 + rational2;
+    cout << rational1 << " + " << rational2 << " = " << result << endl;
 
-    // Test for operator-=
-    Rationnel r2{3, 4};
-    num1 = 1; den1 = 4;
-    r2 -= Rationnel{num1, den1};
-    cout << "Testing operator-=: " << r2 << endl;
+    // Subtraction
+    result = rational1 - rational2;
+    cout << rational1 << " - " << rational2 << " = " << result << endl;
 
-    // Test for operator/
-    num1 = 1; den1 = 2;
-    num2 = 1; den2 = 4;
-    cout << "Testing operator/: " << (Rationnel{num1, den1} / 2) << endl;
+    // Multiplication
+    result = rational1 * rational2;
+    cout << rational1 << " * " << rational2 << " = " << result << endl;
 
-    // Test for operator*
-    num1 = 1; den1 = 2;
-    num2 = 1; den2 = 4;
-    cout << "Testing operator*: " << (Rationnel{num1, den1} * Rationnel{num2, den2}) << endl;
+    // Division (handled inside the operator function)
+    if (rational2.num == 0) {
+        cerr << "Error: Division by zero is not allowed." << endl;
+    } else {
+        result = rational1 / rational2;
+        cout << rational1 << " / " << rational2 << " = " << result << endl;
+    }
 
-    // Test for operator<
-    num1 = 1; den1 = 2;
-    num2 = 1; den2 = 4;
-    cout << "Testing operator<: " << (Rationnel{num1, den1} < Rationnel{num2, den2}) << endl;
+    // Create two rational numbers
+    Rationnel rational3 = {3, 4}; // 3/4
+    Rationnel rational4 = {2, 4}; // 2/4
 
-    // Test for operator>
-    num1 = 1; den1 = 2;
-    num2 = 1; den2 = 4;
-    cout << "Testing operator>: " << (Rationnel{num1, den1} > Rationnel{num2, den2}) << endl;
+    // Simplify rationals
+    rational3 = simplifier(rational3);
+    rational4 = simplifier(rational4);
 
-    // Test for operator==
-    num1 = 1; den1 = 2;
-    num2 = 1; den2 = 4;
-    cout << "Testing operator==: " << (Rationnel{num1, den1} == Rationnel{num2, den2}) << endl;
+    // Display simplified rationals
+    cout << "Simplified rationals:" << endl;
+    afficher(rational3);
+    afficher(rational4);
 
-    // Test for operator!=
-    num1 = 1; den1 = 2;
-    num2 = 1; den2 = 4;
-    cout << "Testing operator!=: " << (Rationnel{num1, den1} != Rationnel{num2, den2}) << endl;
+    // Test comparison operators
 
+    // Test equality
+    if (rational3 == rational4) {
+        cout << "rational3: " << rational3 << ", rational4: " << rational4 << " are equal" << endl;
+    } else {
+        cout << "rational3: " << rational3 << ", rational4: " << rational4 << " are different " << endl;
+    }
+
+    // Test inequality
+    if (rational3 != rational4) {
+        cout << rational3 << " != " << rational4 << endl;
+    } else {
+        cout << rational3 << " == " << rational4 << endl;
+    }
+
+    // Test less than
+    if (rational3 < rational4) {
+        cout << rational3 << " < " << rational4 << endl;
+    } else {
+        cout << rational3 << " >= " << rational4 << endl;
+    }
+
+    // Test less than or equal
+    if (rational3 <= rational4) {
+        cout << rational3 << " <= " << rational4 << endl;
+    } else {
+        cout << rational3 << " > " << rational4 << endl;
+    }
+
+    // Test greater than
+    if (rational3 > rational4) {
+        cout << rational3 << " > " << rational4 << endl;
+    } else {
+        cout << rational3 << " <= " << rational4 << endl;
+    }
+
+    // Test greater than or equal
+    if (rational3 >= rational4) {
+        cout << rational3 << " >= " << rational4 << endl;
+    } else {
+        cout << rational3 << " < " << rational4 << endl;
+    }
+
+    // Return 0 to indicate success
     return 0;
 }
