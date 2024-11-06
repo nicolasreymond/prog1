@@ -15,6 +15,7 @@
 #include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 string replace_all_GPT(string str, const string& from, const string& to) {
     if (from.empty())
@@ -61,7 +62,7 @@ void process_file(const string& filename, int k, const string& option) {
         str.resize(str.length() / (1 << -k));
     }
 
-    auto t1 = chrono::high_resolution_clock::now();
+    high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
     if (option == "GPT") {
         str = replace_all_GPT(str, "de ", "xYxYx");
@@ -71,11 +72,11 @@ void process_file(const string& filename, int k, const string& option) {
         replace_all(str, "xYxYx", "de ");
     }
 
-    auto t2 = chrono::high_resolution_clock::now();
-    chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double>>(t2 - t1);
+    duration<double> time_span = duration_cast<duration<double>>(high_resolution_clock::now() - t1);
 
     cout << "Length of the string: " << str.length() << endl;
-    cout << "Time taken: " << time_span.count() << " seconds" << endl;
+    cout << "Time taken: " << fixed << time_span.count() << " seconds" << endl;
+    cout << "Used option: " << (option == "GPT" ? "GPT" : "NRE") << endl;
 }
 
 int main(int argc, char* argv[]) {
