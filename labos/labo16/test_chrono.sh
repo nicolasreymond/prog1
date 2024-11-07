@@ -10,7 +10,7 @@ output_file="results_1.csv"
 echo "k,Method,Result,Time" > $output_file
 
 # Loop over different values of k
-for k in {-6..-1}; do
+for k in {-10..0}; do
     echo "Running labo16 with k=$k"
     result_gpt=$(./reymond_labo16 la_comedie_humaine.txt $k GPT | grep -o '[0-9,.]*' | tr '\n' ',')
     result_nre=$(./reymond_labo16 la_comedie_humaine.txt $k NRE | grep -o '[0-9,.]*' | tr '\n' ',')

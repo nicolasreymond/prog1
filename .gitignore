@@ -42,3 +42,9 @@ labo0
 
 # Ignore PRG1_Recueil_Exercices
 PRG1_Recueil_Exercices/
+
+# Ignore ods files
+*.ods
+
+# Ignore kml files
+*.kml
