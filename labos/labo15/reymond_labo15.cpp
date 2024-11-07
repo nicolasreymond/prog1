@@ -114,7 +114,9 @@ int main(int argc, char* argv[]) {
 
     ifstream outfileCheck(destFile);
     if (outfileCheck.good()) {
-        long fileSize = 0;
+        outfileCheck.seekg(0, ios::end);
+        long fileSize = outfileCheck.tellg();
+        outfileCheck.seekg(0, ios::beg);
         cout << "File " << destFile << " already exists with size " << fileSize << " bytes." << endl;
         cout << "Do you want to overwrite it? (y/n): ";
         char response;
