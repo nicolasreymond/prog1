@@ -119,14 +119,20 @@ void process_file(const string& filename, int k, const string& option) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc < 4) {
-        cerr << "Usage: " << argv[0] << " <filename> <k> <option>" << endl;
+    if (argc < 4 || argv[1] == "-h" || argv[1] == "--help") {
+        cerr << "Usage: " << argv[0] << " <filename> <k> <option>" << endl
+             << "Example: " << argv[0] << " file.txt 2 GPT" << endl
+             << "Arguments:" << endl
+             << "  <filename> - The name of the file to be processed." << endl
+             << "  <k>        - An integer that determines how the string is modified." << endl
+             << "  <option>   - A string that specifies which replacement function to use." << endl;
+            
         return 1;
     }
 
     string filename = argv[1];
     int k = stoi(argv[2]);
-    string option = argv[3];
+    string option = argv[3] ? argv[3] : "NRE";
 
     process_file(filename, k, option);
 
