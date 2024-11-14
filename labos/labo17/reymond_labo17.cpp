@@ -149,6 +149,9 @@ void testFunctions() {
     bool isEqual = areVectorsEqual(v1, v2);
     cout << "Are v1 and v2 equal? " << (isEqual ? "Yes" : "No") << endl;
 
+    cout << "largeNumber1: " << largeNumber1 << endl;
+    cout << "largeNumber2: " << largeNumber2 << endl;
+    
     // Testing addition of large numbers
     vector<int> sum = largeNumber1 + largeNumber2;
     cout << "Sum of largeNumber1 and largeNumber2: " << sum << endl;
