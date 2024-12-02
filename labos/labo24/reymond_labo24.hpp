@@ -129,7 +129,8 @@ public:
             if (right.value[i] == '1') {
                 result += temp;
             }
-            temp.value += '0'; // Shift left by 1 bit
+            // Shift left by 1 bit
+            temp.value += '0'; 
         }
 
         value = result.value;
