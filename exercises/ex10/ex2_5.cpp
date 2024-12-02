@@ -15,7 +15,6 @@
 using namespace std;
 
 template <typename T>
-
 void tri_generique(T &a)
 {
     int n = a.size();
