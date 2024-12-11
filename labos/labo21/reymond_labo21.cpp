@@ -5,8 +5,7 @@
 using namespace std;
 
 template <typename T>
-void comb_sort(T start, T end)
-{
+void comb_sort(T start, T end){
     const double shrink = 1.3; // Best value found in previous lab
     size_t gap = distance(start, end);
     bool sorted = false;
@@ -37,15 +36,13 @@ void comb_sort(T start, T end)
  * @param v vecteur d'entier
  * @return ostream&
  */
-ostream &operator<<(ostream &stream, const vector<int> &v)
-{
+ostream &operator<<(ostream &stream, const vector<int> &v){
     for (const int &e : v)
         stream << e << " ";
     return stream;
 }
 
-int main()
-{
+int main(){
     srand(static_cast<unsigned int>(time(0)));
     cout << "algorithme,nbElements,nbComparaisons" << endl;
     for (int i = 100; i <= 100000; i *= 2)

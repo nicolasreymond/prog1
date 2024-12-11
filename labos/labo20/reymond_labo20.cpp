@@ -9,8 +9,7 @@ int compteur_fusion = 0;
  *
  * @param v Vector d'entiers
  */
-int tri_insertion(vector<int> &v)
-{
+int tri_insertion(vector<int> &v){
     int compteurComp = 0;
     // Appliquer un tri par insertion standard
     for (size_t i = 1; i < v.size(); ++i)
@@ -34,8 +33,7 @@ int tri_insertion(vector<int> &v)
  * @param shrink Facteur de réduction de l'écart des dents du peigne
  * @param min_gap Ecart minimum entre les dents du peigne
  */
-int comb_sort(vector<int> &v, double shrink, size_t min_gap)
-{
+int comb_sort(vector<int> &v, double shrink, size_t min_gap){
     int compteurComp = 0;
     size_t gap = v.size();
     // trier grossièrement avec un peigne aux dents écartées
@@ -58,8 +56,7 @@ int comb_sort(vector<int> &v, double shrink, size_t min_gap)
  * @param vb Vector b
  * @return vector<int>
  */
-vector<int> fusion(vector<int> va, vector<int> vb)
-{
+vector<int> fusion(vector<int> va, vector<int> vb){
     vector<int> resultat;
     int i = 0, j = 0;
     // Fusionner les deux vecteurs
@@ -95,8 +92,7 @@ vector<int> fusion(vector<int> va, vector<int> vb)
  *
  * @param v Vector d'entiers
  */
-void tri_fusion(vector<int> &v)
-{
+void tri_fusion(vector<int> &v){
     if (v.size() < 2) // Déjà trié,on ne fait rien
         return;
     vector<int> va, vb;
@@ -113,14 +109,12 @@ void tri_fusion(vector<int> &v)
  * @param v vecteur d'entier
  * @return ostream&
  */
-ostream &operator<<(ostream &stream, const vector<int> &v)
-{
+ostream &operator<<(ostream &stream, const vector<int> &v){
     for (const int &e : v)
         stream << e << " ";
     return stream;
 }
-int main()
-{
+int main(){
     // Trouver les meilleurs paramètres
     // Generer un vector d'entier de taille 10 et de composition aléatoire
     //  const int nbElements = 100;

@@ -6,8 +6,7 @@ using namespace std;
 const int pouces_par_pied = 12;
 const double metre_par_pouce = 0.0254;
 
-int main()
-{
+int main(){
   double longueur; // Longueur entrée par l'utilisateur
   cout << "Longueur en metres a transformer en pieds et pouces: " << endl;
   cin >> longueur;

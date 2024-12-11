@@ -12,8 +12,7 @@
 
 using namespace std;
 
-void printBorder(int size, int y, const string &left, const string &mid, const string &right, const string &innerMid)
-{
+void printBorder(int size, int y, const string &left, const string &mid, const string &right, const string &innerMid){
     cout << left;
     for (int k = 0; k < size; k++)
     {
@@ -26,8 +25,7 @@ void printBorder(int size, int y, const string &left, const string &mid, const s
     cout << right << endl;
 }
 
-void printInnerBorder(int size, int y, const string &left, const string &mid, const string &right)
-{
+void printInnerBorder(int size, int y, const string &left, const string &mid, const string &right){
     cout << left;
     for (int k = 0; k < size; k++)
     {
@@ -40,8 +38,7 @@ void printInnerBorder(int size, int y, const string &left, const string &mid, co
     cout << right << endl;
 }
 
-vector<vector<int>> readSudokuFromFile(const string &filename, int size)
-{
+vector<vector<int>> readSudokuFromFile(const string &filename, int size){
     ifstream file(filename);
     vector<vector<int>> grid(size, vector<int>(size, 0));
 
@@ -67,8 +64,7 @@ vector<vector<int>> readSudokuFromFile(const string &filename, int size)
     return grid;
 }
 
-void displaySudokuFromFile(const vector<vector<int>> &grid, int x, int y)
-{
+void displaySudokuFromFile(const vector<vector<int>> &grid, int x, int y){
     int size = x * y;
 
     // Print top border
@@ -121,8 +117,7 @@ void displaySudokuFromFile(const vector<vector<int>> &grid, int x, int y)
     printBorder(size, y, "┗", "┻", "┛", "┷");
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     if (argc != 2)
     {
         cerr << "Usage: " << argv[0] << " <filename>" << endl;

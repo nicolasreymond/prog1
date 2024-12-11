@@ -5,8 +5,7 @@
 
 using namespace std;
 
-string vraiFaux(bool b)
-{
+string vraiFaux(bool b){
     return b ? "vrai" : "faux";
 }
 

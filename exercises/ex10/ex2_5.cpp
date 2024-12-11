@@ -15,8 +15,7 @@
 using namespace std;
 
 template <typename T>
-void tri_generique(T &a)
-{
+void tri_generique(T &a){
     int n = a.size();
     for (int i = 0; i < n - 2; i++)
     {
@@ -31,8 +30,7 @@ void tri_generique(T &a)
     }
 }
 
-int main()
-{
+int main(){
 
     vector v{6, 2, 8, 7, 1, 3};
     array a{"chien"s, "chat"s, "souris"s, "poisson"s};

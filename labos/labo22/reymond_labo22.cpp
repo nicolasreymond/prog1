@@ -42,8 +42,7 @@ int count_if_less_than(T start, T end, U val) {
 }
 
 template <>
-int count_if_less_than(const char **start, const char **end, const char *val)
-{
+int count_if_less_than(const char **start, const char **end, const char *val){
     int count = 0;
     for (auto it = start; it != end; ++it)
     {

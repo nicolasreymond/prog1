@@ -16,8 +16,7 @@
 using namespace std;
 
 // Function to estimate the value of Pi
-double estimatePi(int numDraws)
-{
+double estimatePi(int numDraws){
     int insideCircle = 0;
     random_device rd;                          
     mt19937 gen(rd());                         
@@ -39,8 +38,7 @@ double estimatePi(int numDraws)
     return 4.0 * insideCircle / numDraws;
 }
 
-int main()
-{
+int main(){
     cout << "Estimation of Pi for powers of 2 up to INT_MAX:\n";
 
     // Estimate Pi for powers of 2 until we reach the limit of an int

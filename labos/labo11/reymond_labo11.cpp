@@ -25,8 +25,7 @@ struct CoordinatesWGS84
     double latitude;  // in degrees
 };
 
-CoordinatesWGS84 convertMN03ToWGS84(const CoordinatesMN03 &mn03)
-{
+CoordinatesWGS84 convertMN03ToWGS84(const CoordinatesMN03 &mn03){
     // Convert meters to kilometers
     const double METERS_TO_KILOMETERS = 1000.0;
     double x_km = mn03.x / METERS_TO_KILOMETERS;
@@ -39,8 +38,7 @@ CoordinatesWGS84 convertMN03ToWGS84(const CoordinatesMN03 &mn03)
     return {lambda, phi};
 }
 
-int main()
-{
+int main(){
     CoordinatesMN03 mn03;
     cout << "Enter x coordinate in meters: ";
     cin >> mn03.x;

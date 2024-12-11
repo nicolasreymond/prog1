@@ -49,8 +49,7 @@ string &replace_all_GPT(string& str, const string& from, const string& to) {
  * @param to The substring to replace with.
  * @return A reference to the modified string `str`.
  */
-string &replace_all(string &str, const string &from, const string &to)
-{
+string &replace_all(string &str, const string &from, const string &to){
     string result;
     size_t start_pos = 0;
     size_t found_pos;

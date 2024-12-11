@@ -28,8 +28,7 @@ void croix(int h){
 }
 
 
-int main()
-{
+int main(){
     cout << "donner la taille de la croix : ";
     int h;
     cin >> h; 

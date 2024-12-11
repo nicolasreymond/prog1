@@ -13,8 +13,7 @@
 using namespace std;
 
 // Function to calculate the Syracuse sequence
-void syracuse(int n)
-{
+void syracuse(int n){
     while (n != 1)
     {
         cout << n << " ";
@@ -27,8 +26,7 @@ void syracuse(int n)
 }
 
 // Function to show how many steps are needed to reach 1
-void syracuseSteps(int n)
-{
+void syracuseSteps(int n){
     int steps = 0;
     while (n != 1)
     {
@@ -41,8 +39,7 @@ void syracuseSteps(int n)
     cout << "Number of steps: " << steps << endl;
 }
 
-int main()
-{
+int main(){
     int n;
     cout << "Enter a number to calculate the Syracuse sequence: ";
     cin >> n;

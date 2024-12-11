@@ -14,8 +14,7 @@
 
 using namespace std;
 
-int main()
-{
+int main(){
     double num, sum = 0, sumOfSquares = 0;
     int count = 0;
 

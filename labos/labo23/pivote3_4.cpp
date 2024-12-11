@@ -26,15 +26,13 @@ using namespace std;
 const size_t nb_colonnes = 4; /* Nombre de colonne du système, y compris second membre*/
 const size_t nb_lignes = 3;   /* Nombre de lignes du système d'équations */
 
-void imprime_ligne(const double ligne[])
-{ 
+void imprime_ligne(const double ligne[]){ 
   for (size_t j = 0; j < nb_colonnes; j++)
     cout << scientific << ligne[j] << " ";
   cout << endl;
 }
 
-void imprime_matrice(const double t[nb_lignes][nb_colonnes])
-{ 
+void imprime_matrice(const double t[nb_lignes][nb_colonnes]){ 
   cout << "----------------------" << endl;
   for (size_t i = 0; i < nb_lignes; i++)
     imprime_ligne(t[i]);
@@ -44,8 +42,7 @@ void imprime_matrice(const double t[nb_lignes][nb_colonnes])
 
 /*Opération de pivotage */
 void pivote(double t[nb_lignes][nb_colonnes], 
-            size_t ligne, size_t colonne)
-{ 
+            size_t ligne, size_t colonne){ 
   for (size_t i = 0; i < nb_lignes; i++) if (i != ligne)
     for (size_t j = 0; j < nb_colonnes; j++) if (j != colonne)
       t[i][j] = t[i][j]-t[i][colonne]* t[ligne][j]/ t[ligne][colonne];
@@ -60,8 +57,7 @@ void pivote(double t[nb_lignes][nb_colonnes],
 }
 
 
-int main(void)
-{
+int main(void){
   double t[nb_lignes][nb_colonnes];
 
   /* Lecture des éléments de la matrice + vecteur */
