@@ -17,6 +17,69 @@ class TestLongBinary : public ::testing::Test {};
 class ShowBinary : public ::testing::Test {};
 class TestSetBase : public ::testing::Test {};
 
+TEST_F(TestDivision, LargeNumbers)
+{
+    Unsigned u1("13763753091226345046315979581580902400000000");
+    Unsigned u2("371993326789901217467999448150835200000000");
+    Unsigned u3 = u1 / u2;
+    EXPECT_EQ(u3.to_base(10), "37");
+    EXPECT_NE(u3.to_base(10), "36");
+
+    Unsigned u4("10333147966386144929666651337523200000000");
+    Unsigned u5("295232799039604140847618609643520000000");
+    Unsigned u6 = u4 / u5;
+    EXPECT_EQ(u6.to_base(10), "35");
+    EXPECT_NE(u6.to_base(10), "34");
+}
+
+TEST_F(TestModulo, LargeNumbers)
+{
+    Unsigned u1("13763753091226345046315979581580902400000000");
+    Unsigned u2("371993326789901217467999448150835200000000");
+    Unsigned u3 = u1 % u2;
+    EXPECT_EQ(u3.to_base(10), "0");
+    EXPECT_NE(u3.to_base(10), "1");
+
+    Unsigned u4("10333147966386144929666651337523200000000");
+    Unsigned u5("295232799039604140847618609643520000000");
+    Unsigned u6 = u4 % u5;
+    EXPECT_EQ(u6.to_base(10), "0");
+    EXPECT_NE(u6.to_base(10), "1");
+}
+
+TEST_F(ShowBinary, LargeNumbers)
+{
+    Unsigned u1("13763753091226345046315979581580902400000000");
+    EXPECT_EQ(u1.to_base(36), "DX80IZ5DFNBWN51XC0000000");
+    EXPECT_NE(u1.to_base(36), "DX80IZ5DFNBWN51XC0000001");
+
+    Unsigned u2("371993326789901217467999448150835200000000");
+    EXPECT_EQ(u2.to_base(36), "S7XULVW9L4T5CO8N71F0000");
+    EXPECT_NE(u2.to_base(36), "S7XULVW9L4T5CO8N71F0001");
+
+    Unsigned u3("10333147966386144929666651337523200000000");
+    EXPECT_EQ(u3.to_base(36), "1MPGR1D8L2PPC8WST73HBU0");
+    EXPECT_NE(u3.to_base(36), "1MPGR1D8L2PPC8WST73HBU1");
+
+    Unsigned u4("295232799039604140847618609643520000000");
+    EXPECT_EQ(u4.to_base(36), "3E2JRL77RF2MDNB1112600");
+    EXPECT_NE(u4.to_base(36), "3E2JRL77RF2MDNB1112601");
+}
+
+TEST_F(TestDivision, DivisionByZero)
+{
+    Unsigned u1("10");
+    Unsigned u2("0");
+    EXPECT_THROW(u1 / u2, std::invalid_argument);
+}
+
+TEST_F(TestSubtraction, NegativeResult)
+{
+    Unsigned u1("10");
+    Unsigned u2("20");
+    EXPECT_THROW(u1 - u2, std::invalid_argument);
+}
+
 TEST_F(TestAddition, BasicTests) {
     Unsigned u1("1010");   // 10 in binary
     Unsigned u2(10);       // 10 in decimal
