@@ -2,8 +2,9 @@
 *
 # But not directories
 !*/
-# And not files with extensions
-!*.*
+
+# Ignore PRG1_Recueil_Exercices
+PRG1_Recueil_Exercices/
 
 # Except Makefile
 !Makefile
@@ -38,13 +39,15 @@ __pycache__/
 # Ignore environment files
 .env
 
-labo0
-
-# Ignore PRG1_Recueil_Exercices
-PRG1_Recueil_Exercices/
+# Ignore labo0 directory
+labo0/
 
 # Ignore ods files
 *.ods
 
 # Ignore kml files
 *.kml
+
+# Ignore resume folder but not main.pdf
+resume/*
+!resume/main.pdf
