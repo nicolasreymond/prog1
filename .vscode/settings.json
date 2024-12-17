@@ -80,5 +80,12 @@
             "pattern": "${workspaceFolder}/labos/labo24/tests/test_reymond_labo24",
             "framework": "googleTest"
         }
+    ],
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/nreymond/dev/heig-vd/prog1/exercises",
+            "binaryPath": "/home/nreymond/dev/heig-vd/prog1/exercises/X_exam",
+            "binaryArgs": []
+        }
     ]
 }
