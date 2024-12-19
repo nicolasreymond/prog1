@@ -1,10 +1,10 @@
-# Ignore all files without an extension
-*
-# But not directories
-!*/
+
+
+# Accept .hpp
+!*.hpp
 
 # Ignore PRG1_Recueil_Exercices
-PRG1_Recueil_Exercices/
+PRG1_*
 
 # Except Makefile
 !Makefile
@@ -26,6 +26,8 @@ Thumbs.db
 # Ignore IDE specific files
 vscode/
 .idea/
+.vscode/
+*.json
 
 # Ignore compiled files
 *.o
@@ -42,10 +44,8 @@ __pycache__/
 # Ignore labo0 directory
 labo0/
 
-# Ignore ods files
+# Ignore specifics files
 *.ods
-
-# Ignore kml files
 *.kml
 
 # Ignore resume folder but not main.pdf
