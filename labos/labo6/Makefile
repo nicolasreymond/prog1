@@ -6,7 +6,7 @@ CCFLAGS = -std=c++17 -pedantic -Wall -g
 all: $(EXECS)
 
 %: %.cpp
-	$(CC) $(CCFLAGS) $? -o $@ 
+	$(CC) $(CCFLAGS) $? -o $@.out 
 
 clean:
 	rm -f $(EXECS) a.out
