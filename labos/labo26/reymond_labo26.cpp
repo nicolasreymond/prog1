@@ -54,8 +54,10 @@ public:
 
 Int::Int() : sign(false), value(0) {}
 
-Int::Int(const string &binary) {
-    if (binary.empty()) {
+Int::Int(const string &binary)
+{
+    if (binary.empty())
+    {
         throw invalid_argument("Empty string");
     }
     sign = binary[0] == '-';
@@ -68,12 +70,14 @@ Int::Int(int64_t number)
     value = Unsigned(sign ? -number : number);
 }
 
-int64_t Int::to_int64() const {
+int64_t Int::to_int64() const
+{
     int64_t result = static_cast<int64_t>(value.to_uint64());
     return sign ? -result : result;
 }
 
-string Int::data() const {
+string Int::data() const
+{
     return (sign ? "-" : "") + value.data();
 }
 
@@ -82,7 +86,8 @@ string Int::to_base(int base) const
     return value.to_base(base);
 }
 
-Int::operator int64_t() const {
+Int::operator int64_t() const
+{
     return to_int64();
 }
 
@@ -223,27 +228,48 @@ ostream &operator<<(ostream &os, const Int &number)
     {
         os << '-';
     }
+    else if (os.flags() & ios::showpos && !number.sign)
+    {
+        os << '+';
+    }
+
+    if (os.flags() & ios::showbase)
+    {
+        if (os.flags() & ios::hex)
+        {
+            os << "0x";
+        }
+        else if (os.flags() & ios::oct)
+        {
+            os << "0";
+        }
+    }
+
     os << number.value;
     return os;
 }
 
-Int &Int::operator++() {
+Int &Int::operator++()
+{
     *this += Int(1);
     return *this;
 }
 
-Int Int::operator++(int) {
+Int Int::operator++(int)
+{
     Int temp = *this;
     ++(*this);
     return temp;
 }
 
-Int &Int::operator--() {
+Int &Int::operator--()
+{
     *this -= Int(1);
     return *this;
 }
 
-Int Int::operator--(int) {
+Int Int::operator--(int)
+{
     Int temp = *this;
     --(*this);
     return temp;
@@ -255,16 +281,19 @@ int main()
     Int num2(-42);
     Int num3(0);
 
-    cout << num1+num2 << endl;
+    cout << "num1+num2: " << num1 + num2 << endl;
 
+    cout << "With showpos flag:" << endl;
     cout << showpos << num1 << endl;
     cout << showpos << num2 << endl;
     cout << showpos << num3 << endl;
 
+    cout << "With noshowpos flag:" << endl;
     cout << noshowpos << num1 << endl;
     cout << noshowpos << num2 << endl;
     cout << noshowpos << num3 << endl;
 
+    cout << "With showbase flag:" << endl;
     cout << showbase << num1 << endl;
     cout << showbase << num2 << endl;
     cout << showbase << num3 << endl;
