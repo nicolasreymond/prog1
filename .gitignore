@@ -1,5 +1,3 @@
-
-
 # Accept .hpp
 !*.hpp
 
@@ -48,6 +46,7 @@ labo0/
 *.ods
 *.kml
 
-# Ignore resume folder but not main.pdf
-resume/*
-!resume/main.pdf
+# Ignore resume folder but not main.pdf and .tex
+resume/**
+!resume/**/*.pdf
+!resume/**/*.tex
