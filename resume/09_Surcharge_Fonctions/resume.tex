@@ -1,0 +1,307 @@
+% Résumé pour 09_Surcharge_Fonctions
+\section{ Résumé : 09\_Surcharge et Fonctions Génériques}
+
+\subsection{ Qu'est-ce que la Surcharge de Fonctions ?}
+La surcharge de fonctions permet de définir plusieurs fonctions ayant le même nom, mais des paramètres différents.
+\begin{itemize}
+    \item Cela améliore la lisibilité et la flexibilité du code.
+    \item Le compilateur choisit la bonne version de la fonction en fonction des arguments fournis.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Surcharge de Fonctions]
+\begin{verbatim}
+void afficher(int x) {
+    cout << "Entier : " << x << endl;
+}
+
+void afficher(double x) {
+    cout << "Flottant : " << x << endl;
+}
+
+void afficher(string x) {
+    cout << "Texte : " << x << endl;
+}
+
+int main() {
+    afficher(42);        // Appelle afficher(int)
+    afficher(3.14);      // Appelle afficher(double)
+    afficher("Bonjour"); // Appelle afficher(string)
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Règles pour la Surcharge de Fonctions}
+\begin{itemize}
+    \item Les fonctions doivent avoir des signatures différentes (nombre, type ou ordre des paramètres).
+    \item Le retour de la fonction n'est pas pris en compte dans la surcharge.
+\end{itemize}
+
+\textbf{Exemple Incorrect :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple Incorrect de Surcharge]
+\begin{verbatim}
+int addition(int a, int b);
+double addition(int a, int b); // Erreur : signature identique
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Surcharge d'Opérateurs}
+En C++, il est possible de redéfinir les opérateurs pour des types définis par l'utilisateur (par exemple, des classes).
+\begin{itemize}
+    \item Utilisé pour rendre les objets de classes manipulables comme des types natifs.
+    \item Les opérateurs sont redéfinis en utilisant la fonction membre \texttt{operator}.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Surcharge d'Opérateurs]
+\begin{verbatim}
+class Point {
+public:
+    int x, y;
+
+    Point(int a, int b) : x(a), y(b) {}
+
+    // Surcharge de l'operateur +=
+    Point operator+=(const Point &p) {
+        return Point(x + p.x, y + p.y);
+    }
+
+    // Surcharge de l'operateur +
+    Point operator+(const Point_droit &p, const Point_gauche &q) {
+        return Point(p.x + q.x, p.y + q.y);
+    }
+
+    void afficher() {
+        cout << "(" << x << ", " << y << ")" << endl;
+    }
+};
+
+int main() {
+    Point p1(2, 3), p2(4, 5);
+    Point p2 += p1;     // Utilise operator+=
+    Point p3 = p1 + p2; // Utilise operator+
+    p2.afficher();      // Affiche (6, 8)
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Surcharge de l'opérateur de flux}
+Il est possible de surcharger l'opérateur de flux \texttt{<<} pour permettre l'affichage des objets d'une classe. Cette surcharge personnalise le comportement de \texttt{cout} (ou tout autre flux de sortie) pour afficher une représentation spécifique d'un objet.
+
+\subsubsection{ Pourquoi surcharger \texttt{<<} ?}
+Par défaut, \texttt{cout} ne sait pas comment afficher les objets définis par l'utilisateur. La surcharge de \texttt{<<} permet de définir une représentation adaptée.
+
+\textbf{Exemple (sans surcharge) :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple sans Surcharge de Flux]
+\begin{verbatim}
+Point p(2, 3);
+cout << p; // Erreur : pas de définition pour afficher un Point
+\end{verbatim}
+\end{tcolorbox}
+
+En surchargeant \texttt{<<}, nous pouvons afficher un objet comme suit :
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple avec Surcharge de Flux]
+\begin{verbatim}
+Point p(2, 3);
+cout << p; // Affiche : (2, 3)
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{ Syntaxe de la surcharge}
+Pour surcharger \texttt{<<}, on définit une fonction globale ou amie de la classe :
+
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Syntaxe de la Surcharge de Flux]
+\begin{verbatim}
+ostream& operator<<(ostream &out, const Point &p);
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{itemize}
+    \item \texttt{ostream\&} : La fonction retourne une référence au flux pour permettre le chaînage.
+    \item \texttt{ostream \&out} : Flux de sortie (comme \texttt{cout}).
+    \item \texttt{const Point \&p} : Objet à afficher, passé par référence constante.
+\end{itemize}
+
+\subsubsection{ Exemple complet}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple Complet de Surcharge de Flux]
+\begin{verbatim}
+#include <iostream>
+using namespace std;
+
+// Classe Point
+class Point {
+private:
+    int x, y;
+
+public:
+    // Constructeur
+    Point(int a, int b) : x(a), y(b) {}
+
+    // Surcharge de l'opérateur <<
+    friend ostream& operator<<(ostream &out, const Point &p) {
+        out << "(" << p.x << ", " << p.y << ")";
+        return out; // Permet le chaînage
+    }
+};
+
+int main() {
+    Point p1(2, 3), p2(5, 8);
+    cout << p1 << endl; // Affiche : (2, 3)
+    cout << p2 << endl; // Affiche : (5, 8)
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{ Explication détaillée}
+\begin{itemize}
+    \item La fonction \texttt{operator<<} est définie comme amie (\texttt{friend}) pour accéder aux membres privés de \texttt{Point}.
+    \item La fonction utilise \texttt{out <<} pour ajouter les données au flux.
+    \item La fonction retourne \texttt{out} pour permettre le chaînage :
+          \begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Chaînage de Flux]
+\begin{verbatim}
+          cout << p1 << " et " << p2;
+          // Affiche : (2, 3) et (5, 8)
+          \end{verbatim}
+\end{tcolorbox}
+\end{itemize}
+
+\subsubsection{ Autres opérateurs}
+De manière similaire, vous pouvez surcharger l'opérateur \texttt{>>} pour permettre la saisie d'objets.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Surcharge de l'Opérateur >>]
+\begin{verbatim}
+istream& operator>>(istream &in, Point &p) {
+    in >> p.x >> p.y;
+    return in;
+}
+
+int main() {
+    Point p;
+    cin >> p; // Saisir deux entiers pour x et y
+    cout << p; // Affiche le point saisi
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{ Résumé}
+La surcharge de l'opérateur \texttt{<<} permet de personnaliser l'affichage des objets d'une classe. Elle doit :
+\begin{itemize}
+    \item Être déclarée comme fonction globale ou amie.
+    \item Prendre en paramètre un flux de sortie (\texttt{ostream \&}) et une référence constante à l'objet.
+    \item Retourner le flux pour permettre le chaînage.
+\end{itemize}
+
+---
+
+\subsection{ Fonctions Génériques avec \texttt{templates}}
+Les \textbf{templates} permettent de créer des fonctions génériques qui fonctionnent avec différents types sans redéfinir la fonction.
+
+\textbf{Syntaxe :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Syntaxe des Templates]
+\begin{verbatim}
+template<typename T>
+T addition(T a, T b) {
+    return a + b;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Template]
+\begin{verbatim}
+template<typename T>
+T addition(T a, T b) {
+    return a + b;
+}
+
+int main() {
+    cout << addition(5, 3) << endl;       // Utilise int
+    cout << addition(2.5, 1.5) << endl;  // Utilise double
+    return 0;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Surcharge de Fonctions Génériques}
+Les \texttt{templates} peuvent être combinés avec des fonctions spécifiques pour des cas particuliers.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Surcharge de Template]
+\begin{verbatim}
+template<typename T>
+void afficher(T valeur) {
+    cout << "Valeur generique : " << valeur << endl;
+}
+
+// Surcharge pour string
+void afficher(string valeur) {
+    cout << "Texte : " << valeur << endl;
+}
+
+int main() {
+    afficher(42);          // Appelle la fonction generique
+    afficher("Bonjour");   // Appelle la surcharge pour string
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Templates de Classe}
+Les \texttt{templates} peuvent également être utilisés pour créer des classes génériques.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Template de Classe]
+\begin{verbatim}
+template<typename T>
+class Boite {
+private:
+    T valeur;
+public:
+    Boite(T v) : valeur(v) {}
+    void afficher() {
+        cout << "Valeur : " << valeur << endl;
+    }
+};
+
+int main() {
+    Boite<int> boiteEntiere(42);
+    Boite<string> boiteTexte("Bonjour");
+
+    boiteEntiere.afficher(); // Valeur : 42
+    boiteTexte.afficher();   // Valeur : Bonjour
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Exemples Pratiques}
+\textbf{Combinaison de Templates et Surcharge :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Combinaison de Templates et Surcharge]
+\begin{verbatim}
+template<typename T>
+T carre(T x) {
+    return x * x;
+}
+
+// Specialisation pour string
+string carre(string x) {
+    return x + x; // Repete la chaine
+}
+
+int main() {
+    cout << carre(5) << endl;        // 25
+    cout << carre(3.14) << endl;    // 9.8596
+    cout << carre("Hello") << endl; // HelloHello
+}
+\end{verbatim}
+\end{tcolorbox}
+

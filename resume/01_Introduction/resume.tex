@@ -1,0 +1,73 @@
+% Résumé pour 01_Introduction
+\section{ Résumé : 01\_Introduction}
+
+\subsection{ Organisation du cours}
+Le cours PRG1 utilise :
+\begin{itemize}
+    \item Supports disponibles sur Moodle.
+    \item Basé sur le livre \textit{Programmer en C++ moderne — de C++11 à C++20}.
+    \item Langage enseigné : \textbf{C++20}.
+    \item Compilation et IDE :
+        \begin{itemize}
+            \item Compilateur recommandé : \texttt{g++}.
+            \item Environnement optionnel : Visual Studio, CLion, etc.
+        \end{itemize}
+\end{itemize}
+
+\subsection{ Objectifs du cours}
+Apprendre les bases de la programmation en C++ :
+\begin{itemize}
+    \item Comprendre la syntaxe du langage.
+    \item Manipuler des types de données, des instructions, des fonctions et des classes.
+    \item Développer une logique algorithmique.
+    \item Mettre en place des programmes fiables, modulaires et efficaces.
+\end{itemize}
+
+\subsection{ Un premier programme en C++}
+
+Voici un exemple de programme simple en C++ :
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Premier Programme]
+\begin{verbatim}
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Bonjour, PRG1 !" << endl;
+    return 0;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Explications} :
+\begin{itemize}
+    \item \texttt{\#include <iostream>} : permet d'utiliser \texttt{cout} et \texttt{cin}.
+    \item \texttt{using namespace std;} : simplifie l'écriture (on évite d'écrire \texttt{std::cout}).
+    \item \texttt{int main()} : point d'entrée du programme.
+    \item \texttt{cout << "Bonjour";} : affiche du texte à l'écran.
+    \item \texttt{return 0;} : indique que le programme s'est terminé correctement.
+\end{itemize}
+
+\subsection{ Étapes de la compilation}
+La compilation d'un programme C++ se fait en plusieurs étapes :
+\begin{enumerate}
+    \item \textbf{Préprocesseur} : gère les directives \texttt{\#include} et \texttt{\#define}.
+    \item \textbf{Compilation} : transforme le code source en code machine.
+    \item \textbf{Édition de liens} : combine plusieurs fichiers objets pour créer un exécutable.
+\end{enumerate}
+
+\subsection{ Erreurs fréquentes}
+\begin{itemize}
+    \item \textbf{Erreurs de syntaxe} : oublis de \texttt{;} ou d'accolades.
+    \item \textbf{Erreurs de compilation} : utilisation de types incompatibles.
+    \item \textbf{Erreurs de lien} : fonctions manquantes ou bibliothèques non incluses.
+\end{itemize}
+
+\textbf{Exemple d'erreur classique} :
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Erreur Classique]
+\begin{verbatim}
+int main() {
+    cout << "Bonjour" // Manque le point-virgule
+    return 0;
+}
+\end{verbatim}
+\end{tcolorbox}

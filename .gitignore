@@ -47,6 +47,8 @@ labo0/
 *.kml
 
 # Ignore resume folder but not main.pdf and .tex
-resume/**
+resume/*.*
+# resume/
 !resume/**/*.pdf
-!resume/**/*.tex
+!resume/*.tex
+

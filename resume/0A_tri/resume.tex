@@ -1,0 +1,155 @@
+\section{ Tri : Algorithmes et Utilisation}
+
+\subsection{ Introduction au Tri}
+Le tri consiste à organiser les éléments d'un tableau ou d'une liste dans un ordre spécifique (croissant ou décroissant). Voici quelques algorithmes de tri couramment utilisés et leurs caractéristiques.
+
+---
+
+\subsection{ Tri à Bulles (Bubble Sort)}
+Le tri à bulles compare chaque paire d'éléments adjacents et les échange s'ils sont dans le mauvais ordre. Cet algorithme est simple mais inefficace pour les grands tableaux.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques]
+\begin{verbatim}
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Échange
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Complexité :}
+\begin{itemize}
+    \item Meilleur cas : $O(n)$ (tableau déjà trié).
+    \item Pire cas : $O(n^2)$ (tableau trié dans l'ordre inverse).
+    \item Moyenne : $O(n^2)$.
+\end{itemize}
+
+---
+
+\subsection{ Tri par Insertion (Insertion Sort)}
+Le tri par insertion insère chaque élément à sa position correcte dans un sous-tableau déjà trié.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques]
+\begin{verbatim}
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        // Déplace les éléments plus grands que key
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Complexité :}
+\begin{itemize}
+    \item Meilleur cas : $O(n)$.
+    \item Pire cas : $O(n^2)$.
+    \item Moyenne : $O(n^2)$.
+\end{itemize}
+
+---
+
+\subsection{ Utilisation de \texttt{std::sort}}
+La bibliothèque standard C++ propose l'algorithme \texttt{std::sort}, qui est beaucoup plus rapide et optimisé.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques]
+\begin{verbatim}
+#include <algorithm>
+#include <vector>
+
+int main() {
+    std::vector<int> vec = {5, 2, 9, 1, 5, 6};
+    std::sort(vec.begin(), vec.end());
+
+    for (int v : vec) {
+        std::cout << v << " ";
+    }
+    return 0;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Complexité :}
+\begin{itemize}
+    \item En moyenne : $O(n \log n)$.
+\end{itemize}
+
+---
+
+\subsection{ Tri par Fusion (Merge Sort)}
+Le tri par fusion divise le tableau en sous-tableaux, les trie récursivement, puis les fusionne.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques]
+\begin{verbatim}
+void merge(int arr[], int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
+
+    int L[n1], R[n2];
+
+    for (int i = 0; i < n1; i++) L[i] = arr[l + i];
+    for (int i = 0; i < n2; i++) R[i] = arr[m + 1 + i];
+
+    int i = 0, j = 0, k = l;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) arr[k++] = L[i++];
+        else arr[k++] = R[j++];
+    }
+
+    while (i < n1) arr[k++] = L[i++];
+    while (j < n2) arr[k++] = R[j++];
+}
+
+void mergeSort(int arr[], int l, int r) {
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Complexité :}
+\begin{itemize}
+    \item Pire cas : $O(n \log n)$.
+\end{itemize}
+
+---
+
+\subsection{ Comparaison des Algorithmes de Tri}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Algorithme} & \textbf{Meilleur Cas} & \textbf{Pire Cas} & \textbf{Moyenne} \\
+\hline
+Tri à Bulles & $O(n)$ & $O(n^2)$ & $O(n^2)$ \\
+\hline
+Tri par Insertion & $O(n)$ & $O(n^2)$ & $O(n^2)$ \\
+\hline
+\texttt{std::sort} & $O(n \log n)$ & $O(n \log n)$ & $O(n \log n)$ \\
+\hline
+Tri par Fusion & $O(n \log n)$ & $O(n \log n)$ & $O(n \log n)$ \\
+\hline
+\end{tabular}
+\end{center}

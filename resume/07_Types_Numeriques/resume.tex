@@ -1,0 +1,133 @@
+% Résumé pour 07_Types_Numeriques
+\section{ Résumé: 07\_Types Numériques}
+
+\subsection{ Types Numériques en C++}
+En C++, les types numériques se divisent en deux grandes catégories :
+\begin{itemize}
+    \item \textbf{Types entiers :} pour les nombres sans décimales.
+    \item \textbf{Types flottants :} pour les nombres avec décimales.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Types Numériques]
+\begin{verbatim}
+int entier = 42;           // Type entier
+double flottant = 3.14;    // Type flottant
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Tableau des Types Numériques}
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Type} & \textbf{Taille (bits)} & \textbf{Plage de Valeurs} & \textbf{Exemple} \\
+        \hline
+        \texttt{char} & 8 & -128 à 127 & \texttt{char c = 'A';} \\
+        \hline
+        \texttt{short} & 16 & -32,768 à 32,767 & \texttt{short s = 100;} \\
+        \hline
+        \texttt{int} & 32 & -2,147,483,648 à 2,147,483,647 & \texttt{int i = 123;} \\
+        \hline
+        \texttt{long} & 64 & Très grand & \texttt{long l = 1234567890;} \\
+        \hline
+        \texttt{float} & 32 & $\pm 10^{-38}$ à $\pm 10^{38}$ & \texttt{float f = 3.14;} \\
+        \hline
+        \texttt{double} & 64 & $\pm 10^{-308}$ à $\pm 10^{308}$ & \texttt{double d = 3.14159;} \\
+        \hline
+    \end{tabular}
+\end{center}
+
+---
+
+\subsection{ Spécificateurs de Type}
+Les spécificateurs permettent d'ajuster la taille ou la plage des types numériques.
+\begin{itemize}
+    \item \texttt{unsigned} : supprime les nombres négatifs.
+    \item \texttt{long} : augmente la capacité.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Spécificateurs de Type]
+\begin{verbatim}
+unsigned int positif = 42;  // Seulement des nombres positifs
+long long tresGrand = 123456789012345;
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Casting (Conversion de Type)}
+\begin{itemize}
+    \item \textbf{Cast implicite :} automatique quand la conversion est sûre.
+    \item \textbf{Cast explicite :} forcé par le programmeur.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Casting]
+\begin{verbatim}
+int entier = 42;
+double flottant = entier;          // Implicite
+double pi = 3.14;
+int arrondi = (int)pi;             // Explicite
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Opérations sur les Types Numériques}
+Les opérateurs mathématiques s'appliquent directement :
+\begin{itemize}
+    \item \textbf{Arithmétiques :} \texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}, \texttt{\%}.
+    \item \textbf{Relationnels :} \texttt{==}, \texttt{!=}, \texttt{<}, \texttt{>}.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples d'Opérations sur les Types Numériques]
+\begin{verbatim}
+int a = 10, b = 3;
+cout << a + b;  // Affiche 13
+cout << a / b;  // Affiche 3 (division entière)
+cout << a % b;  // Affiche 1 (modulo)
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Limites des Types Numériques}
+La bibliothèque \texttt{<limits>} permet de connaître les limites d'un type.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Limites des Types Numériques]
+\begin{verbatim}
+#include <limits>
+cout << "Max int : " << numeric_limits<int>::max() << endl;
+cout << "Min double : " << numeric_limits<double>::min() << endl;
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Exemples Pratiques}
+\textbf{Calcul de Moyenne :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Calcul de Moyenne]
+\begin{verbatim}
+int a = 5, b = 8, c = 12;
+double moyenne = (a + b + c) / 3.0;  // Division réelle
+cout << "Moyenne : " << moyenne;
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Vérification de Dépassement :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Vérification de Dépassement]
+\begin{verbatim}
+int a = numeric_limits<int>::max();
+cout << "a : " << a << endl;
+a = a + 1; // Dépassement : résultat indéfini
+cout << "a après dépassement : " << a << endl;
+\end{verbatim}
+\end{tcolorbox}
+
+---
+

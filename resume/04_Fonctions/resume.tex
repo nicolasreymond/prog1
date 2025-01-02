@@ -1,0 +1,157 @@
+% Résumé pour 04_Fonctions
+\section{ Résumé : 04\_Fonctions}
+
+\subsection{ Rôle des Fonctions}
+Les fonctions permettent :
+\begin{itemize}
+    \item De structurer le code pour le rendre plus lisible et réutilisable.
+    \item De réaliser des opérations spécifiques (calculs, affichage, etc.).
+    \item D'éviter la duplication de code.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Fonction]
+\begin{verbatim}
+double addition(double a, double b) {
+    return a + b;
+}
+
+int main() {
+    double resultat = addition(3.5, 2.2);
+    cout << "Résultat : " << resultat << endl;
+    return 0;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Déclaration et Définition}
+\begin{itemize}
+    \item Une \textbf{déclaration} informe le compilateur de l'existence de la fonction.
+    \item Une \textbf{définition} contient le code de la fonction.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Déclaration et Définition]
+\begin{verbatim}
+// Déclaration
+double addition(double a, double b);
+
+// Définition
+double addition(double a, double b) {
+    return a + b;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Arguments et Paramètres}
+\begin{itemize}
+    \item Les \textbf{paramètres} sont des variables locales définies dans la fonction.
+    \item Les \textbf{arguments} sont les valeurs passées à la fonction.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Arguments et Paramètres]
+\begin{verbatim}
+void afficherMessage(string message) { // Paramètre : message
+    cout << message << endl;
+}
+
+int main() {
+    afficherMessage("Bonjour, PRG1 !"); // Argument : "Bonjour, PRG1 !"
+    return 0;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Transmission par Valeur ou Référence}
+\begin{itemize}
+    \item \textbf{Par valeur} : une copie de l'argument est faite (ne modifie pas l'original).
+    \item \textbf{Par référence} : permet de modifier la variable originale.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Transmission par Valeur ou Référence]
+\begin{verbatim}
+// Par valeur
+void incrementerValeur(int n) {
+    n++;
+}
+
+// Par référence
+void incrementerReference(int &n) {
+    n++;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Différence à l'exécution :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Différence à l'Exécution]
+\begin{verbatim}
+int main() {
+    int a = 5;
+    incrementerValeur(a);   // a reste 5
+    incrementerReference(a); // a devient 6
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Valeurs de Retour}
+\begin{itemize}
+    \item Les fonctions peuvent retourner une valeur avec \texttt{return}.
+    \item Si aucune valeur n'est retournée, le type \texttt{void} est utilisé.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Valeurs de Retour]
+\begin{verbatim}
+int carre(int x) {
+    return x * x;
+}
+
+void afficherMessage() {
+    cout << "Message sans retour." << endl;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Arguments par Défaut}
+Les arguments peuvent avoir des valeurs par défaut dans leur déclaration.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Arguments par Défaut]
+\begin{verbatim}
+void saluer(string nom = "Utilisateur") {
+    cout << "Bonjour, " << nom << " !" << endl;
+}
+
+int main() {
+    saluer();             // Affiche : Bonjour, Utilisateur !
+    saluer("Alice");      // Affiche : Bonjour, Alice !
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Fonction Récursive}
+Une fonction peut s'appeler elle-même (récursivité).
+
+\textbf{Exemple : Calcul Factoriel}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Fonction Récursive]
+\begin{verbatim}
+int factoriel(int n) {
+    if (n <= 1)
+        return 1;
+    else
+        return n * factoriel(n - 1);
+}
+
+int main() {
+    cout << "Factoriel de 5 : " << factoriel(5) << endl;
+    return 0;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Résumé des Concepts}
+\begin{center}
+    %\includegraphics[width=0.7\textwidth]{../images/functions_overview.png}
+\end{center}

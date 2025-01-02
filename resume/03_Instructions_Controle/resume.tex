@@ -1,0 +1,192 @@
+% Résumé pour 03_Instructions_Controle
+\section{ Résumé : 03\_Instructions de Contrôle}
+
+\subsection{ Structure Séquentielle}
+Par défaut, les instructions d'un programme sont exécutées dans l'ordre, de haut en bas.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Structure Séquentielle]
+\begin{verbatim}
+int a = 5;
+cout << "Valeur de a : " << a << endl;
+// Résultat : Valeur de a : 5
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Structures Conditionnelles}
+Les structures conditionnelles permettent de prendre des décisions dans le programme.
+
+\subsubsection{ Instruction \texttt{if-else}}
+\begin{itemize}
+    \item Exécute un bloc d'instructions si une condition est vraie.
+\end{itemize}
+
+\textbf{Syntaxe :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Syntaxe de l'Instruction if-else]
+\begin{verbatim}
+if (condition) {
+    // Instructions si condition est vraie
+} else {
+    // Instructions si condition est fausse
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de l'Instruction if-else]
+\begin{verbatim}
+int age = 20;
+if (age >= 18) {
+    cout << "Vous êtes majeur." << endl;
+} else {
+    cout << "Vous êtes mineur." << endl;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{ Instruction \texttt{switch}}
+\begin{itemize}
+    \item Permet de choisir parmi plusieurs options.
+    \item Utilise des \texttt{case} et un \texttt{default}.
+\end{itemize}
+
+\textbf{Syntaxe :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Syntaxe de l'Instruction switch]
+\begin{verbatim}
+switch (variable) {
+    case valeur1:
+        // Instructions
+        break;
+    case valeur2:
+        // Instructions
+        break;
+    default:
+        // Instructions par défaut
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de l'Instruction switch]
+\begin{verbatim}
+int jour = 3;
+switch (jour) {
+    case 1:
+        cout << "Lundi" << endl;
+        break;
+    case 2:
+        cout << "Mardi" << endl;
+        break;
+    default:
+        cout << "Autre jour" << endl;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Structures Itératives}
+Les boucles permettent de répéter un bloc d'instructions plusieurs fois.
+
+\subsubsection{ Boucle \texttt{while}}
+\begin{itemize}
+    \item Exécute tant qu'une condition est vraie.
+\end{itemize}
+
+\textbf{Syntaxe :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Syntaxe de la Boucle while]
+\begin{verbatim}
+while (condition) {
+    // Instructions
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de la Boucle while]
+\begin{verbatim}
+int i = 0;
+while (i < 5) {
+    cout << i << endl;
+    i++;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{ Boucle \texttt{do-while}}
+\begin{itemize}
+    \item Exécute au moins une fois, puis tant que la condition est vraie.
+\end{itemize}
+
+\textbf{Syntaxe :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Syntaxe de la Boucle do-while]
+\begin{verbatim}
+do {
+    // Instructions
+} while (condition);
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de la Boucle do-while]
+\begin{verbatim}
+int i = 0;
+do {
+    cout << i << endl;
+    i++;
+} while (i < 5);
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{ Boucle \texttt{for}}
+\begin{itemize}
+    \item Boucle compacte avec initialisation, condition et incrémentation.
+\end{itemize}
+
+\textbf{Syntaxe :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Syntaxe de la Boucle for]
+\begin{verbatim}
+for (initialisation; condition; incrément) {
+    // Instructions
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de la Boucle for]
+\begin{verbatim}
+for (int i = 0; i < 5; i++) {
+    cout << i << endl;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Instructions de Saut}
+\begin{itemize}
+    \item \textbf{\texttt{break}} : Sort de la boucle ou du \texttt{switch}.
+    \item \textbf{\texttt{continue}} : Passe directement à l'itération suivante.
+    \item \textbf{\texttt{goto}} : Saute à une étiquette (peu recommandé).
+\end{itemize}
+
+\textbf{Exemple d'utilisation de \texttt{break} :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Utilisation de break]
+\begin{verbatim}
+for (int i = 0; i < 10; i++) {
+    if (i == 5) break; // Sort de la boucle si i vaut 5
+    cout << i << endl;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Exemple d'utilisation de \texttt{continue} :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Utilisation de continue]
+\begin{verbatim}
+for (int i = 0; i < 5; i++) {
+    if (i == 2) continue; // Passe directement à i = 3
+    cout << i << endl;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Résumé visuel des instructions de contrôle}
+\begin{center}
+    %\includegraphics[width=0.8\textwidth]{../images/flow_control.png}
+\end{center}

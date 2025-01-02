@@ -1,0 +1,177 @@
+% Résumé pour 08_Type_Vector
+\section{ Résumé : 08\_Type Vector}
+
+\subsection{ Introduction au \texttt{std::vector}}
+Le type \texttt{std::vector}, défini dans \texttt{<vector>}, est une structure de données dynamique qui permet de stocker une collection d'éléments.
+\begin{itemize}
+    \item Similaire à un tableau (\texttt{array}), mais de taille dynamique.
+    \item Permet des opérations avancées comme l'ajout ou la suppression d'éléments.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de std::vector]
+\begin{verbatim}
+#include <vector>
+using namespace std;
+
+vector<int> nombres = {1, 2, 3, 4, 5};
+cout << "Premier élément : " << nombres[0] << endl;
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Création et Initialisation}
+\begin{itemize}
+    \item Déclaration vide : \texttt{vector<int> vec;}.
+    \item Initialisation avec des valeurs : \texttt{vector<int> vec = \{1, 2, 3\};}.
+    \item Taille et valeur initiale : \texttt{vector<int> vec(5, 0); // 5 zéros}.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Création et Initialisation]
+\begin{verbatim}
+vector<int> vide;               // Vecteur vide
+vector<int> valeurs = {10, 20}; // Initialisé avec des valeurs
+vector<int> zeros(5, 0);        // 5 zéros
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Accès aux Éléments}
+\begin{itemize}
+    \item \texttt{operator[]} : accès direct.
+    \item \texttt{at()} : accès sécurisé (vérifie les limites).
+    \item \texttt{front()} : premier élément.
+    \item \texttt{back()} : dernier élément.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Accès aux Éléments]
+\begin{verbatim}
+vector<int> nombres = {10, 20, 30};
+cout << nombres[1];           // 20
+cout << nombres.at(2);        // 30
+cout << nombres.front();      // 10
+cout << nombres.back();       // 30
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Opérations de Base}
+\begin{itemize}
+    \item \texttt{push\_back(val)} : ajoute un élément à la fin.
+    \item \texttt{pop\_back()} : retire le dernier élément.
+    \item \texttt{size()} : retourne la taille.
+    \item \texttt{clear()} : supprime tous les éléments.
+    \item \texttt{empty()} : vérifie si le vecteur est vide.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Opérations de Base]
+\begin{verbatim}
+vector<int> vec = {1, 2, 3};
+vec.push_back(4);  // {1, 2, 3, 4}
+vec.pop_back();    // {1, 2, 3}
+cout << vec.size(); // 3
+vec.clear();        // Vide le vecteur
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Parcours d'un \texttt{vector}}
+\begin{itemize}
+    \item Avec une boucle \texttt{for}.
+    \item Avec une boucle \texttt{range-based for}.
+    \item Avec des itérateurs.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Parcours d'un vector]
+\begin{verbatim}
+vector<int> nombres = {10, 20, 30};
+
+// Boucle for classique
+for (int i = 0; i < nombres.size(); i++) {
+    cout << nombres[i] << " ";
+}
+
+// Boucle for basée sur la plage
+for (int n : nombres) {
+    cout << n << " ";
+}
+
+// Avec des itérateurs
+for (auto it = nombres.begin(); it != nombres.end(); ++it) {
+    cout << *it << " ";
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Fonctions Avancées}
+\begin{itemize}
+    \item \texttt{insert(it, val)} : insère un élément à une position donnée.
+    \item \texttt{erase(it)} : supprime un élément à une position donnée.
+    \item \texttt{resize(n)} : redimensionne le vecteur.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Fonctions Avancées]
+\begin{verbatim}
+vector<int> vec = {10, 20, 30};
+vec.insert(vec.begin() + 1, 15); // {10, 15, 20, 30}
+vec.erase(vec.begin() + 2);      // {10, 15, 30}
+vec.resize(5, 0);                // {10, 15, 30, 0, 0}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Comparaison avec les Tableaux}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Vecteur (\texttt{vector})} & \textbf{Tableau (\texttt{array})} \\
+        \hline
+        Taille dynamique & Taille fixe \\
+        Mémoire allouée dynamiquement & Mémoire allouée statiquement \\
+        Méthodes intégrées (\texttt{push\_back}, etc.) & Pas de méthodes supplémentaires \\
+        Plus lent (gestion dynamique) & Plus rapide (gestion fixe) \\
+        \hline
+    \end{tabular}
+\end{center}
+
+---
+
+\subsection{ Exemples Pratiques}
+\textbf{Tri d'un vecteur :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Tri d'un Vecteur]
+\begin{verbatim}
+#include <algorithm>
+vector<int> vec = {4, 2, 8, 6};
+sort(vec.begin(), vec.end()); // {2, 4, 6, 8}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Rechercher un élément :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Recherche d'un Élément]
+\begin{verbatim}
+#include <algorithm>
+vector<int> vec = {10, 20, 30};
+if (find(vec.begin(), vec.end(), 20) != vec.end()) {
+    cout << "20 trouvé !";
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Résumé Visuel des Méthodes}
+\begin{center}
+    %\includegraphics[width=0.8\textwidth]{../images/vector_methods.png}
+\end{center}

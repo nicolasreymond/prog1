@@ -1,0 +1,193 @@
+% Résumé pour 11_Patrons_de_Classes
+\section{ Résumé: 11 Patrons de Classes}
+
+\subsection{ Introduction aux Patrons de Classes}
+Un patron de classe (\textbf{template}) permet de créer des classes génériques. Il facilite la réutilisation du code en permettant à une classe de fonctionner avec différents types de données.
+
+\textbf{Syntaxe Générale :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Syntaxe Générale des Templates]
+\begin{verbatim}
+template<typename T>
+class Classe {
+    // Définition de la classe avec le type générique T
+};
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Exemple Simple de Patron de Classe}
+Voici un exemple de classe générique \texttt{Boite} qui peut contenir n'importe quel type de données.
+
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Patron de Classe]
+\begin{verbatim}
+#include <iostream>
+using namespace std;
+
+template<typename T>
+class Boite {
+private:
+    T valeur;
+
+public:
+    Boite(T v) : valeur(v) {}
+
+    T obtenirValeur() {
+        return valeur;
+    }
+};
+
+int main() {
+    Boite<int> boiteEntiere(42);       // Contient un entier
+    Boite<string> boiteTexte("Bonjour"); // Contient une chaîne
+
+    cout << "Entier : " << boiteEntiere.obtenirValeur() << endl;
+    cout << "Texte : " << boiteTexte.obtenirValeur() << endl;
+    return 0;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Patrons avec plusieurs Types}
+Les patrons peuvent accepter plusieurs paramètres de type.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Patron avec Plusieurs Types]
+\begin{verbatim}
+template<typename T, typename U>
+class Paire {
+private:
+    T premier;
+    U second;
+
+public:
+    Paire(T a, U b) : premier(a), second(b) {}
+
+    void afficher() {
+        cout << "Paire : (" << premier << ", " << second << ")" << endl;
+    }
+};
+
+int main() {
+    Paire<int, string> paire(1, "Un");
+    paire.afficher(); // Affiche : Paire : (1, Un)
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Fonctions Membres Hors de la Classe}
+Les définitions de fonctions membres pour les classes génériques doivent aussi utiliser le mot-clé \texttt{template}.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Fonctions Membres Hors de la Classe]
+\begin{verbatim}
+template<typename T>
+class Boite {
+private:
+    T valeur;
+
+public:
+    Boite(T v);
+    T obtenirValeur();
+};
+
+template<typename T>
+Boite<T>::Boite(T v) : valeur(v) {}
+
+template<typename T>
+T Boite<T>::obtenirValeur() {
+    return valeur;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Spécialisation des Patrons de Classes}
+La spécialisation permet de définir un comportement spécifique pour un type particulier.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Spécialisation de Patron]
+\begin{verbatim}
+template<typename T>
+class Afficheur {
+public:
+    void afficher(T valeur) {
+        cout << "Valeur générique : " << valeur << endl;
+    }
+};
+
+// Spécialisation pour string
+template<>
+class Afficheur<string> {
+public:
+    void afficher(string valeur) {
+        cout << "Chaîne : " << valeur << endl;
+    }
+};
+
+int main() {
+    Afficheur<int> afficheurInt;
+    Afficheur<string> afficheurString;
+
+    afficheurInt.afficher(42);           // Affiche : Valeur générique : 42
+    afficheurString.afficher("Bonjour"); // Affiche : Chaîne : Bonjour
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Patrons avec des Méthodes Statistiques}
+Les patrons peuvent aussi contenir des membres statiques. Ces membres sont partagés entre toutes les instances d'un type donné.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Méthodes Statistiques]
+\begin{verbatim}
+template<typename T>
+class Compteur {
+private:
+    static int total;
+
+public:
+    Compteur() {
+        total++;
+    }
+
+    static int obtenirTotal() {
+        return total;
+    }
+};
+
+template<typename T>
+int Compteur<T>::total = 0;
+
+int main() {
+    Compteur<int> c1, c2;
+    Compteur<string> c3;
+
+    cout << "Total pour int : " << Compteur<int>::obtenirTotal() << endl; // 2
+    cout << "Total pour string : " << Compteur<string>::obtenirTotal() << endl; // 1
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Limitations et Avantages des Patrons}
+\textbf{Avantages :}
+\begin{itemize}
+    \item Réduction de la duplication de code.
+    \item Flexibilité pour différents types.
+    \item Compatible avec les types primitifs et personnalisés.
+\end{itemize}
+
+\textbf{Limitations :}
+\begin{itemize}
+    \item La taille du binaire peut augmenter en raison de la génération de code pour chaque type utilisé.
+    \item La gestion des erreurs de compilation peut être complexe.
+\end{itemize}

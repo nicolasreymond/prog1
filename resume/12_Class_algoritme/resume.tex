@@ -1,0 +1,373 @@
+\section{ Résumé : Bibliothèque \texttt{<algorithm>} et Itérateurs}
+
+\subsection{ Introduction aux Itérateurs}
+\paragraph{Catégories d'Itérateurs :}
+\begin{itemize}
+    \item \textbf{In\_it} : Pour la lecture (\texttt{*it}).
+    \item \textbf{Out\_it} : Pour l’écriture (\texttt{*it = value}).
+    \item \textbf{Unidir\_it} : Unidirectionnels (\texttt{++it}).
+    \item \textbf{Bidir\_it} : Bidirectionnels (\texttt{++it}, \texttt{--it}).
+    \item \textbf{Direct\_it} : Aléatoires (\texttt{it[n]}).
+\end{itemize}
+
+\textbf{Exemples d'Itérateurs :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples d'Itérateurs]
+\begin{verbatim}
+// Exemple d'itérateur unidirectionnel
+std::vector<int> vec = {1, 2, 3, 4, 5};
+for (auto it = vec.begin(); it != vec.end(); ++it) {
+    std::cout << *it << " ";
+}
+
+// Exemple d'itérateur inversé
+for (auto it = vec.rbegin(); it != vec.rend(); ++it) {
+    std::cout << *it << " ";
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\paragraph{Fonctions associées :}
+\begin{itemize}
+    \item \texttt{begin()}, \texttt{end()} : Renvoient les itérateurs pour parcourir une séquence.
+    \item \texttt{rbegin()}, \texttt{rend()} : Itérateurs pour un parcours inversé.
+    \item \texttt{advance(it, n)} : Déplace un itérateur de \texttt{n} pas.
+\end{itemize}
+
+\textbf{Exemple : Avancer un Itérateur :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Avancer un Itérateur]
+\begin{verbatim}
+auto it = vec.begin();
+std::advance(it, 2); // Avance l'itérateur de 2 positions
+std::cout << *it;    // Affiche 3
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Prédicats}
+Un \textbf{prédicat} est une fonction qui retourne un booléen (\texttt{true} ou \texttt{false}). Les prédicats permettent de filtrer ou transformer des données.
+
+\paragraph{Types de Prédicats :}
+\begin{itemize}
+    \item \textbf{Prédicat unaire} : Prend un seul argument.
+    \item \textbf{Prédicat binaire} : Prend deux arguments.
+\end{itemize}
+
+\textbf{Exemples de Prédicats :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Prédicats]
+\begin{verbatim}
+// Prédicat unaire
+bool estPair(int x) {
+    return x % 2 == 0;
+}
+
+// Prédicat binaire
+bool comparerDescendant(int a, int b) {
+    return a > b;
+}
+
+// Utilisation dans un algorithme
+std::sort(vec.begin(), vec.end(), comparerDescendant); // Tri en ordre décroissant
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Algorithmes de Manipulation de Séquences}
+\paragraph{Remplir une Séquence :}
+\begin{itemize}
+    \item \texttt{fill(first, last, val)} : Remplit une plage avec une valeur donnée.
+    \item \texttt{fill\_n(first, n, val)} : Remplit un nombre donné d’éléments.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Remplissage]
+\begin{verbatim}
+std::vector<int> vec(5);
+std::fill(vec.begin(), vec.end(), 42); // Tous les éléments valent 42
+std::fill_n(vec.begin(), 3, 10);       // Les 3 premiers éléments valent 10
+\end{verbatim}
+\end{tcolorbox}
+
+\paragraph{Copier une Séquence :}
+\begin{itemize}
+    \item \texttt{copy(first, last, result)} : Copie une plage.
+    \item \texttt{copy\_if(first, last, result, pred)} : Copie les éléments satisfaisant un prédicat.
+    \item \texttt{copy\_backward(first, last, result)} : Copie dans l’ordre inverse.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Copie]
+\begin{verbatim}
+std::vector<int> source = {1, 2, 3, 4, 5};
+std::vector<int> destination(5);
+
+// Copier tous les éléments
+std::copy(source.begin(), source.end(), destination.begin());
+
+// Copier uniquement les éléments pairs
+std::vector<int> pairs;
+std::copy_if(source.begin(), source.end(), std::back_inserter(pairs), [](int x) { return x % 2 == 0; });
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Transformation des Données}
+\paragraph{Opérations de Transformation :}
+\begin{itemize}
+    \item \texttt{transform(first, last, result, op)} : Applique une opération à chaque élément.
+    \item \texttt{replace(first, last, old\_val, new\_val)} : Remplace les éléments égaux à \texttt{old\_val}.
+    \item \texttt{replace\_if(first, last, pred, new\_val)} : Remplace les éléments satisfaisant un prédicat.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Transformation]
+\begin{verbatim}
+std::vector<int> vec = {1, 2, 3, 4, 5};
+
+// Transformer chaque élément en son double
+std::transform(vec.begin(), vec.end(), vec.begin(), [](int x) { return x * 2; });
+
+// Remplacer 4 par 99
+std::replace(vec.begin(), vec.end(), 4, 99);
+
+// Remplacer les éléments pairs par 0
+std::replace_if(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; }, 0);
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Algorithmes Statistiques}
+\paragraph{Maximum et Minimum :}
+\begin{itemize}
+    \item \texttt{max\_element(first, last)} : Trouve le plus grand élément.
+    \item \texttt{min\_element(first, last)} : Trouve le plus petit élément.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Maximum et Minimum]
+\begin{verbatim}
+std::vector<int> vec = {5, 1, 8, 3, 2};
+auto max_it = std::max_element(vec.begin(), vec.end()); // max_it pointe sur 8
+auto min_it = std::min_element(vec.begin(), vec.end()); // min_it pointe sur 1
+\end{verbatim}
+\end{tcolorbox}
+
+\paragraph{Tests de Prédicats :}
+\begin{itemize}
+    \item \texttt{all\_of(first, last, pred)} : Vérifie si \textbf{tous} les éléments satisfont un prédicat.
+    \item \texttt{any\_of(first, last, pred)} : Vérifie si \textbf{au moins un} élément satisfait un prédicat.
+    \item \texttt{none\_of(first, last, pred)} : Vérifie si \textbf{aucun} élément ne satisfait un prédicat.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Tests de Prédicats]
+\begin{verbatim}
+std::vector<int> vec = {2, 4, 6, 8};
+
+// Vérifie si tous les éléments sont pairs
+bool tousPairs = std::all_of(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; });
+
+// Vérifie s'il existe un élément supérieur à 5
+bool auMoinsUnSup5 = std::any_of(vec.begin(), vec.end(), [](int x) { return x > 5; });
+
+// Vérifie si aucun élément n'est impair
+bool aucunImpair = std::none_of(vec.begin(), vec.end(), [](int x) { return x % 2 != 0; });
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Expressions Lambda}
+\textbf{Syntaxe Générale :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Syntaxe Générale des Lambdas]
+\begin{verbatim}
+[](paramètres) -> type_retour { corps }
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Exemples de Lambdas :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Lambdas]
+\begin{verbatim}
+// Lambda pour vérifier si un nombre est pair
+auto estPair = [](int x) { return x % 2 == 0; };
+
+// Lambda capturant une variable
+int seuil = 5;
+auto plusGrandQueSeuil = [seuil](int x) { return x > seuil; };
+
+// Appliquer une lambda dans un algorithme
+std::vector<int> vec = {1, 2, 3, 4, 5, 6};
+std::copy_if(vec.begin(), vec.end(), std::back_inserter(result), estPair);
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Algorithmes de Recherche}
+\paragraph{Trouver un Élément :}
+\begin{itemize}
+    \item \texttt{find(first, last, val)} : Cherche un élément donné.
+    \item \texttt{find\_if(first, last, pred)} : Cherche le premier élément satisfaisant un prédicat.
+    \item \texttt{find\_if\_not(first, last, pred)} : Cherche le premier élément qui ne satisfait pas un prédicat.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Recherche d'Élément]
+\begin{verbatim}
+std::vector<int> vec = {1, 3, 5, 7, 9};
+
+// Trouve la première occurrence de 5
+auto it = std::find(vec.begin(), vec.end(), 5);
+if (it != vec.end()) {
+    std::cout << "5 trouvé à l'indice : " << std::distance(vec.begin(), it);
+}
+
+// Trouve le premier élément pair
+auto pair_it = std::find_if(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; });
+if (pair_it != vec.end()) {
+    std::cout << "Premier élément pair : " << *pair_it;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\paragraph{Autres Recherches :}
+\begin{itemize}
+    \item \texttt{search(first1, last1, first2, last2)} : Trouve une sous-séquence dans une plage.
+    \item \texttt{search\_n(first, last, n, val)} : Trouve une sous-séquence de \texttt{n} éléments consécutifs égaux.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Recherche Avancée]
+\begin{verbatim}
+// Recherche d'une sous-séquence {3, 5}
+std::vector<int> sub = {3, 5};
+auto sub_it = std::search(vec.begin(), vec.end(), sub.begin(), sub.end());
+if (sub_it != vec.end()) {
+    std::cout << "Sous-séquence trouvée à l'indice : " << std::distance(vec.begin(), sub_it);
+}
+
+// Recherche de 3 occurrences consécutives de 7
+auto n_it = std::search_n(vec.begin(), vec.end(), 3, 7);
+if (n_it != vec.end()) {
+    std::cout << "Trois occurrences consécutives trouvées à l'indice : " << std::distance(vec.begin(), n_it);
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Algorithmes de Suppression et Transformation}
+\paragraph{Supprimer des Éléments :}
+\begin{itemize}
+    \item \texttt{remove(first, last, val)} : Supprime les occurrences d'une valeur.
+    \item \texttt{remove\_if(first, last, pred)} : Supprime les éléments satisfaisant un prédicat.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Suppression]
+\begin{verbatim}
+std::vector<int> vec = {1, 2, 3, 4, 5, 6};
+
+// Supprimer tous les éléments égaux à 3
+vec.erase(std::remove(vec.begin(), vec.end(), 3), vec.end());
+
+// Supprimer tous les éléments pairs
+vec.erase(std::remove_if(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; }), vec.end());
+\end{verbatim}
+\end{tcolorbox}
+
+\paragraph{Transformer une Séquence :}
+\begin{itemize}
+    \item \texttt{transform(first, last, result, op)} : Applique une opération à chaque élément.
+    \item \texttt{replace(first, last, old\_val, new\_val)} : Remplace les occurrences d'une valeur.
+    \item \texttt{replace\_if(first, last, pred, new\_val)} : Remplace les éléments satisfaisant un prédicat.
+\end{itemize}
+
+\textbf{Exemples :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Transformation]
+\begin{verbatim}
+// Multiplier chaque élément par 2
+std::transform(vec.begin(), vec.end(), vec.begin(), [](int x) { return x * 2; });
+
+// Remplacer 4 par 42
+std::replace(vec.begin(), vec.end(), 4, 42);
+
+// Remplacer les éléments pairs par 0
+std::replace_if(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; }, 0);
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Mélanges et Réorganisation}
+\paragraph{Mélanger les Éléments :}
+\begin{itemize}
+    \item \texttt{shuffle(first, last, rng)} : Mélange aléatoirement les éléments (C++11 et ultérieur).
+    \item \texttt{random\_shuffle(first, last)} : Mélange aléatoire (obsolète depuis C++17).
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Mélange]
+\begin{verbatim}
+std::random_device rd;
+std::mt19937 rng(rd());
+std::shuffle(vec.begin(), vec.end(), rng);
+\end{verbatim}
+\end{tcolorbox}
+
+\paragraph{Réorganiser les Éléments :}
+\begin{itemize}
+    \item \texttt{reverse(first, last)} : Inverse une séquence.
+    \item \texttt{rotate(first, middle, last)} : Fait pivoter une séquence autour d'un pivot.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Réorganisation]
+\begin{verbatim}
+// Inverser l'ordre des éléments
+std::reverse(vec.begin(), vec.end());
+
+// Faire pivoter pour que le 3 devienne le premier élément
+std::rotate(vec.begin(), vec.begin() + 2, vec.end());
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Expressions Lambda}
+\textbf{Syntaxe Générale :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Syntaxe Générale des Lambdas]
+\begin{verbatim}
+[](paramètres) -> type_retour { corps }
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Exemples de Lambdas :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples de Lambdas]
+\begin{verbatim}
+// Lambda pour vérifier si un nombre est pair
+auto estPair = [](int x) { return x % 2 == 0; };
+
+// Lambda capturant une variable
+int seuil = 5;
+auto plusGrandQueSeuil = [seuil](int x) { return x > seuil; };
+
+// Appliquer une lambda dans un algorithme
+std::vector<int> vec = {1, 2, 3, 4, 5, 6};
+std::copy_if(vec.begin(), vec.end(), std::back_inserter(result), estPair);
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Concepts Clés}
+\begin{itemize}
+    \item Comprendre les différentes catégories d’itérateurs.
+    \item Savoir utiliser les prédicats dans les algorithmes (\texttt{find\_if}, \texttt{copy\_if}, \texttt{remove\_if}).
+    \item Maîtriser les transformations de séquences (\texttt{transform}, \texttt{replace}).
+    \item Utiliser les expressions lambda pour simplifier le code.
+    \item Connaître les algorithmes de recherche (\texttt{find}, \texttt{search}, \texttt{search\_n}).
+\end{itemize}

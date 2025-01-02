@@ -1,0 +1,137 @@
+% Résumé pour 05_Type_String
+\section{ Résumé : 05\_Type String}
+
+\subsection{ Introduction au Type \texttt{string}}
+Le type \texttt{string} en C++ permet de manipuler facilement des chaînes de caractères.
+\begin{itemize}
+    \item Défini dans la bibliothèque standard \texttt{<string>}.
+    \item Remplace les chaînes de style C (\texttt{char[]}).
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Type string]
+\begin{verbatim}
+#include <string>
+using namespace std;
+
+string nom = "Alice";
+cout << "Bonjour, " << nom << " !" << endl; // Affiche : Bonjour, Alice !
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Déclaration et Initialisation}
+\begin{itemize}
+    \item Chaîne vide : \texttt{string ch1; // ch1 est vide}.
+    \item Initialisation par une chaîne littérale : \texttt{string ch2 = "Bonjour";}.
+    \item Initialisation par répétition : \texttt{string ch3(10, 'x'); // xxxxxxxxxx}.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Déclaration et Initialisation]
+\begin{verbatim}
+string vide;
+string chaine = "Hello";
+string repetition(5, '*'); // ***** (5 étoiles)
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Méthodes Utiles pour les Chaînes}
+\begin{itemize}
+    \item \texttt{size()} ou \texttt{length()} : donne la taille.
+    \item \texttt{empty()} : vérifie si la chaîne est vide.
+    \item \texttt{at(pos)} ou \texttt{operator[]} : accès au caractère à la position \texttt{pos}.
+    \item \texttt{substr(pos, len)} : extrait une sous-chaîne.
+    \item \texttt{append()} ou \texttt{+=} : ajoute à la fin.
+    \item \texttt{erase(pos, len)} : supprime une portion.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Méthodes Utiles]
+\begin{verbatim}
+string texte = "Programmation";
+cout << "Taille : " << texte.size() << endl;  // Taille : 13
+cout << texte.at(0) << texte[1] << endl;      // Pr
+cout << texte.substr(0, 7) << endl;           // Program
+texte.append(" 1");                           // Ajoute " 1" à la fin
+texte.erase(0, 4);                            // Supprime "Prog"
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Concaténation et Comparaison}
+\begin{itemize}
+    \item \textbf{Concaténation :} Utilisez \texttt{+} ou \texttt{+=}.
+    \item \textbf{Comparaison :} Utilisez \texttt{==}, \texttt{!=}, \texttt{<}, \texttt{>}, etc.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Concaténation et Comparaison]
+\begin{verbatim}
+string a = "Bonjour", b = "Monde";
+string c = a + " " + b;  // Bonjour Monde
+cout << (a == "Bonjour"); // true
+cout << (b > "Monde");    // false
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Lecture et Écriture}
+\begin{itemize}
+    \item \textbf{Lecture ligne complète :} \texttt{getline(cin, chaine)}.
+    \item \textbf{Lecture mot à mot :} \texttt{cin >> chaine}.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Lecture et Écriture]
+\begin{verbatim}
+string nom, phrase;
+cout << "Quel est votre nom ? ";
+cin >> nom; // Lit un mot
+cin.ignore(); // Ignorer le saut de ligne
+cout << "Entrez une phrase complète : ";
+getline(cin, phrase);
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Conversion de Numériques en Chaînes et Inversement}
+\begin{itemize}
+    \item \textbf{Chaîne vers numérique :} Utilisez \texttt{stoi()}, \texttt{stod()}, etc.
+    \item \textbf{Numérique vers chaîne :} Utilisez \texttt{to\_string()}.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Conversion]
+\begin{verbatim}
+string chaine = "123";
+int nombre = stoi(chaine);       // Convertit en entier
+double reel = stod("12.34");     // Convertit en réel
+string texte = to_string(45.67); // "45.67"
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Exemples Pratiques}
+\textbf{Manipulation de texte :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Manipulation de Texte]
+\begin{verbatim}
+string phrase = "Programmation C++";
+phrase.insert(13, " en");   // Programmation en C++
+phrase.replace(0, 12, "Cours"); // Cours en C++
+phrase.pop_back();         // Supprime le dernier caractère
+cout << phrase;            // Cours en C+
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Résumé visuel des fonctionnalités}
+\begin{center}
+    %\includegraphics[width=0.8\textwidth]{../images/string_functions.png}
+\end{center}

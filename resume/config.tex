@@ -1,0 +1,94 @@
+\usepackage[utf8]{inputenc}
+\usepackage{tocbibind} % Include this package to manage table of contents
+\usepackage{listings} % Include this package to manage code listing
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage[a4paper, margin=1in]{geometry} % Add this line to configure small margins
+\usepackage{tcolorbox} % Add this line to include the tcolorbox package
+
+% Configure hyperref to use black color for links
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	filecolor=black,
+	urlcolor=black,
+	citecolor=black,
+}
+
+% Configure listings for C++ code with UTF-8 support
+\lstset{
+language=C++,
+basicstyle=\ttfamily\small,
+keywordstyle=\color{blue},
+stringstyle=\color{red},
+commentstyle=\color{green},
+morecomment=[l][\color{magenta}]{\#},
+numbers=left,
+numberstyle=\tiny\color{gray},
+stepnumber=1,
+numbersep=10pt,
+backgroundcolor=\color{white},
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+frame=single,
+tabsize=4,
+captionpos=b,
+breaklines=true,
+breakatwhitespace=false,
+escapeinside={\%*}{*)},
+extendedchars=true,
+inputencoding=utf8,
+literate=
+	{é}{{\'e}}1
+{è}{{\`e}}1
+{ê}{{\^e}}1
+{ë}{{\¨e}}1
+{É}{{\'E}}1
+{Ê}{{\^E}}1
+{Ë}{{\¨E}}1
+{à}{{\`à}}1
+{â}{{\^a}}1
+{ä}{{\¨a}}1
+{À}{{\`A}}1
+{Â}{{\^A}}1
+{Ä}{{\¨A}}1
+{î}{{\^i}}1
+{ï}{{\¨i}}1
+{Î}{{\^I}}1
+{Ï}{{\¨I}}1
+{ô}{{\^o}}1
+{ö}{{\¨o}}1
+{Ô}{{\^O}}1
+{Ö}{{\¨O}}1
+{ù}{{\`u}}1
+{û}{{\^u}}1
+{ü}{{\¨u}}1
+{Ù}{{\`U}}1
+{Û}{{\^U}}1
+{Ü}{{\¨U}}1
+{ç}{{\c{c}}}1
+{Ç}{{\c{C}}}1
+}
+
+% % Commande pour des blocs de code encadrés
+% \newtcblisting{cppcode}[1][]{
+% 	listing only,
+% 	colframe=blue!50!black, % Color of the border
+% 	colback=blue!5!white,   % Background color
+% 	title={1},
+% 	fonttitle=\bfseries,
+% 	listing options={
+% 			language=C++,
+% 			basicstyle=\ttfamily\small,
+% 			keywordstyle=\color{blue},
+% 			stringstyle=\color{red},
+% 			commentstyle=\color{green},
+% 			numbers=left,
+% 			numberstyle=\tiny\color{gray},
+% 			frame=single,
+% 			tabsize=4,
+% 			breaklines=true
+% 		}
+% }

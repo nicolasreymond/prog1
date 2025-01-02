@@ -1,0 +1,161 @@
+% Résumé pour 06_Les_Flux
+\section{ Résumé : 06\_Les Flux}
+
+\subsection{ Introduction aux Flux}
+Un flux est un canal permettant d'envoyer ou de recevoir des données.
+\begin{itemize}
+    \item Flux de sortie : envoi des données vers un périphérique (\texttt{cout}).
+    \item Flux d'entrée : réception des données depuis un périphérique (\texttt{cin}).
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Flux]
+\begin{verbatim}
+#include <iostream>
+using namespace std;
+
+int main() {
+    int nombre;
+    cout << "Entrez un nombre : ";
+    cin >> nombre;
+    cout << "Vous avez entré : " << nombre << endl;
+    return 0;
+}
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Les Flux Prédéfinis}
+\begin{itemize}
+    \item \texttt{cout} : sortie standard (écran).
+    \item \texttt{cin} : entrée standard (clavier).
+    \item \texttt{cerr} : sortie standard sans tampon (affichage immédiat des erreurs).
+    \item \texttt{clog} : sortie standard avec tampon (messages de log).
+\end{itemize}
+
+---
+
+\subsection{ Manipulateurs de Flux}
+Les manipulateurs permettent de formater l'affichage dans les flux.
+
+\subsubsection{ Manipulateurs pour les Entiers}
+\begin{itemize}
+    \item \texttt{dec} : base décimale (par défaut).
+    \item \texttt{hex} : base hexadécimale.
+    \item \texttt{oct} : base octale.
+    \item \texttt{showpos} : affiche le signe \texttt{+} pour les nombres positifs.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Manipulateurs pour les Entiers]
+\begin{verbatim}
+int nombre = 255;
+cout << dec << nombre << endl;  // 255
+cout << hex << nombre << endl;  // ff
+cout << oct << nombre << endl;  // 377
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{ Manipulateurs pour les Nombres Réels}
+\begin{itemize}
+    \item \texttt{fixed} : notation fixe (6 chiffres après la virgule par défaut).
+    \item \texttt{scientific} : notation scientifique.
+    \item \texttt{setprecision(n)} : spécifie le nombre de chiffres significatifs.
+    \item \texttt{showpoint} : force l'affichage des chiffres après la virgule.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Manipulateurs pour les Nombres Réels]
+\begin{verbatim}
+#include <iomanip>
+double pi = 3.14159;
+cout << fixed << setprecision(2) << pi << endl;  // 3.14
+cout << scientific << pi << endl;               // 3.14e+00
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Lecture au Clavier (\texttt{cin})}
+\begin{itemize}
+    \item \texttt{cin >> variable} : lit une entrée (ignore les espaces).
+    \item \texttt{getline(cin, chaine)} : lit une ligne complète.
+\end{itemize}
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Lecture au Clavier]
+\begin{verbatim}
+#include <string>
+string nom;
+cout << "Entrez votre nom : ";
+getline(cin, nom);
+cout << "Bonjour, " << nom << " !" << endl;
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Flux Fichiers}
+Pour lire ou écrire des fichiers, on utilise les classes suivantes :
+\begin{itemize}
+    \item \texttt{ofstream} : flux de sortie vers un fichier.
+    \item \texttt{ifstream} : flux d'entrée depuis un fichier.
+    \item \texttt{fstream} : flux d'entrée et de sortie.
+\end{itemize}
+
+\subsubsection{ Écriture dans un Fichier}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Écriture dans un Fichier]
+\begin{verbatim}
+#include <fstream>
+ofstream fichier("sortie.txt");
+fichier << "Hello, fichier !" << endl;
+fichier.close();
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{ Lecture depuis un Fichier}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Lecture depuis un Fichier]
+\begin{verbatim}
+#include <fstream>
+ifstream fichier("entree.txt");
+string ligne;
+while (getline(fichier, ligne)) {
+    cout << ligne << endl;
+}
+fichier.close();
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Manipulation Avancée des Fichiers}
+\begin{itemize}
+    \item \texttt{seekg(pos)} : déplace le pointeur de lecture.
+    \item \texttt{seekp(pos)} : déplace le pointeur d'écriture.
+    \item \texttt{tellg()} : donne la position actuelle du pointeur de lecture.
+    \item \texttt{tellp()} : donne la position actuelle du pointeur d'écriture.
+\end{itemize}
+
+\textbf{Exemple : Lecture Inversée d'un Fichier :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Lecture Inversée d'un Fichier]
+\begin{verbatim}
+#include <fstream>
+ifstream fichier("texte.txt", ios::ate); // Ouvert en mode "fin de fichier"
+streampos taille = fichier.tellg();     // Taille du fichier
+for (int i = taille - 1; i >= 0; --i) {
+    fichier.seekg(i);
+    char c;
+    fichier.get(c);
+    cout << c;
+}
+fichier.close();
+\end{verbatim}
+\end{tcolorbox}
+
+---
+
+\subsection{ Résumé Visuel des Flux}
+\begin{center}
+    %\includegraphics[width=0.8\textwidth]{../images/flux_summary.png}
+\end{center}

@@ -1,0 +1,578 @@
+\section{Résumé: Chapitre 10 - Classes et Objets}
+
+\subsection{ Notion de classe}
+Une classe regroupe des attributs (\textbf{données}) et des méthodes (\textbf{fonctions}) pour définir le comportement des objets. Une classe peut représenter une entité du monde réel ou abstraite.
+
+\textbf{Exemple 1 : Classe simple}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Rectangle {
+private:
+    double largeur, hauteur;
+
+public:
+    void setDimensions(double l, double h) {
+        largeur = l;
+        hauteur = h;
+    }
+
+    double calculerAire() {
+        return largeur * hauteur;
+    }
+};
+
+Rectangle r;
+r.setDimensions(5.0, 3.0);
+std::cout << "Aire : " << r.calculerAire(); // Affiche : Aire : 15
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Classe avec constructeur}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Rectangle {
+private:
+    double largeur, hauteur;
+
+public:
+    Rectangle(double l, double h) : largeur(l), hauteur(h) {}
+
+    double calculerAire() {
+        return largeur * hauteur;
+    }
+};
+
+Rectangle r(5.0, 3.0);
+std::cout << "Aire : " << r.calculerAire(); // Affiche : Aire : 15
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Structures}
+Une structure (\texttt{struct}) est utilisée pour regrouper des données simples. Contrairement à une classe, ses membres sont publics par défaut.
+
+\textbf{Exemple 1 : Structure simple}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+struct Point {
+    int x, y;
+};
+
+Point p = {2, 3};
+std::cout << "Coordonnées : " << p.x << ", " << p.y; // Affiche : 2, 3
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Structure avec méthode}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+struct Point {
+    int x, y;
+
+    void afficher() {
+        std::cout << "Point : " << x << ", " << y << "\n";
+    }
+};
+
+Point p = {4, 5};
+p.afficher(); // Affiche : Point : 4, 5
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Affectation d'objets}
+L’affectation d’un objet copie ses valeurs dans un autre objet. Cela peut être effectué avec le constructeur de recopie ou l'opérateur d'affectation.
+
+\textbf{Exemple 1 : Copie par défaut}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Point {
+public:
+    int x, y;
+};
+
+Point p1 = {2, 3};
+Point p2 = p1; // Copie les valeurs de p1 dans p2
+std::cout << "p2 : " << p2.x << ", " << p2.y; // Affiche : 2, 3
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Copie avec constructeur de recopie personnalisé}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Point {
+public:
+    int x, y;
+
+    // Constructeur de recopie
+    Point(const Point& autre) {
+        x = autre.x;
+        y = autre.y;
+        std::cout << "Copie effectuée\n";
+    }
+};
+
+Point p1 = {4, 5};
+Point p2 = p1; // Affiche : Copie effectuée
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Constructeur et destructeur}
+Le constructeur initialise les attributs de l’objet, tandis que le destructeur libère les ressources lorsque l’objet est détruit.
+
+\textbf{Exemple 1 : Constructeur par défaut et destructeur}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Exemple {
+public:
+    Exemple() {
+        std::cout << "Constructeur appelé\n";
+    }
+    ~Exemple() {
+        std::cout << "Destructeur appelé\n";
+    }
+};
+
+int main() {
+    Exemple e; // Constructeur appelé
+} // Destructeur appelé
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Constructeur avec paramètres}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Point {
+public:
+    int x, y;
+
+    Point(int a, int b) : x(a), y(b) {
+        std::cout << "Point initialisé : " << x << ", " << y << "\n";
+    }
+};
+
+Point p(2, 3); // Affiche : Point initialisé : 2, 3
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Objets transmis en argument d'une fonction}
+Les objets peuvent être passés à une fonction de différentes manières : par valeur, par référence, ou par référence constante.
+
+\textbf{Exemple 1 : Transmission par valeur}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+void afficherPoint(Point p) {
+    std::cout << "Coordonnées : " << p.x << ", " << p.y << "\n";
+}
+
+Point p = {2, 3};
+afficherPoint(p); // Copie l'objet
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Transmission par référence constante (efficace)}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+void afficherPoint(const Point& p) {
+    std::cout << "Coordonnées : " << p.x << ", " << p.y << "\n";
+}
+
+Point p = {4, 5};
+afficherPoint(p); // Ne copie pas l'objet
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Membres données statiques}
+Les membres statiques appartiennent à la classe et sont partagés entre toutes ses instances.
+
+\textbf{Exemple 1 : Attribut statique pour compter les objets}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Compteur {
+private:
+    static int total;
+
+public:
+    Compteur() { total++; }
+    static int getTotal() { return total; }
+};
+
+int Compteur::total = 0; // Initialisation
+
+int main() {
+    Compteur c1, c2, c3;
+    std::cout << "Total : " << Compteur::getTotal(); // Affiche : Total : 3
+}
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Utilisation d'un membre statique partagé}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Config {
+public:
+    static std::string version;
+
+    static void afficherVersion() {
+        std::cout << "Version : " << version << "\n";
+    }
+};
+
+std::string Config::version = "1.0.0"; // Initialisation
+
+int main() {
+    Config::afficherVersion(); // Affiche : Version : 1.0.0
+}
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Exploitation d'une classe}
+Utiliser une classe consiste à appeler ses méthodes et manipuler ses attributs pour effectuer des tâches.
+
+\textbf{Exemple 1 : Calcul simple avec une classe}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Rectangle {
+private:
+    double largeur, hauteur;
+
+public:
+    void setDimensions(double l, double h) {
+        largeur = l;
+        hauteur = h;
+    }
+
+    double calculerPerimetre() {
+        return 2 * (largeur + hauteur);
+    }
+};
+
+Rectangle rect;
+rect.setDimensions(4, 5);
+std::cout << "Périmètre : " << rect.calculerPerimetre(); // Affiche : Périmètre : 18
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Surdéfinition de fonctions membres}
+La surdéfinition permet de définir plusieurs versions d’une méthode dans une classe en utilisant des paramètres différents.
+
+\textbf{Exemple 1 : Surcharge de méthodes}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Point {
+public:
+    void setCoord(int a) { x = a; }
+    void setCoord(int a, int b) { x = a; y = b; }
+
+private:
+    int x, y;
+};
+
+Point p;
+p.setCoord(5);       // Appelle la méthode avec un paramètre
+p.setCoord(2, 3);    // Appelle la méthode avec deux paramètres
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Surcharge avec des types différents}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Exemple {
+public:
+    void afficher(int n) { std::cout << "Entier : " << n << "\n"; }
+    void afficher(double d) { std::cout << "Double : " << d << "\n"; }
+};
+
+Exemple e;
+e.afficher(5);      // Affiche : Entier : 5
+e.afficher(3.14);   // Affiche : Double : 3.14
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Arguments par défaut}
+Les arguments par défaut permettent de simplifier les appels de fonctions en fournissant une valeur par défaut à certains paramètres.
+
+\textbf{Exemple 1 : Fonction avec un argument par défaut}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+void afficher(int x, int y = 0) {
+    std::cout << x << ", " << y << "\n";
+}
+
+afficher(5);       // Affiche : 5, 0
+afficher(5, 7);    // Affiche : 5, 7
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Plusieurs arguments par défaut}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+void afficherRectangle(int largeur = 1, int hauteur = 1) {
+    std::cout << "Rectangle : " << largeur << " x " << hauteur << "\n";
+}
+
+afficherRectangle();          // Affiche : Rectangle : 1 x 1
+afficherRectangle(5);         // Affiche : Rectangle : 5 x 1
+afficherRectangle(4, 6);      // Affiche : Rectangle : 4 x 6
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Fonctions membres en ligne}
+Les fonctions membres en ligne (\texttt{inline}) permettent d'éviter le surcoût des appels en insérant directement leur code.
+
+\textbf{Exemple 1 : Fonction inline dans une classe}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Point {
+public:
+    inline int getX() const { return x; }
+    inline int getY() const { return y; }
+
+private:
+    int x = 5, y = 10;
+};
+
+Point p;
+std::cout << p.getX() << ", " << p.getY(); // Affiche : 5, 10
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Fonction inline définie hors de la classe}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Rectangle {
+private:
+    double largeur, hauteur;
+
+public:
+    Rectangle(double l, double h) : largeur(l), hauteur(h) {}
+
+    inline double calculerAire() const;
+};
+
+// Définition inline hors de la classe
+inline double Rectangle::calculerAire() const {
+    return largeur * hauteur;
+}
+
+Rectangle rect(5, 3);
+std::cout << "Aire : " << rect.calculerAire(); // Affiche : Aire : 15
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Constructeurs délégués}
+Les constructeurs délégués permettent d’appeler un constructeur depuis un autre pour éviter la duplication de code.
+
+\textbf{Exemple 1 : Constructeurs délégués}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Point {
+public:
+    int x, y;
+
+    // Constructeur principal
+    Point(int a, int b) : x(a), y(b) {}
+
+    // Constructeur délégué
+    Point() : Point(0, 0) {}
+};
+
+Point p1;       // Appelle le constructeur délégué (x = 0, y = 0)
+Point p2(3, 4); // Appelle le constructeur principal (x = 3, y = 4)
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Délégation pour des initialisations complexes}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Rectangle {
+private:
+    double largeur, hauteur;
+
+public:
+    Rectangle(double l, double h) : largeur(l), hauteur(h) {}
+
+    Rectangle() : Rectangle(1.0, 1.0) {} // Initialise à un rectangle par défaut
+};
+
+Rectangle r1;           // Rectangle par défaut : 1 x 1
+Rectangle r2(4.0, 5.0);   // Rectangle : 4 x 5
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Objets transmis à une fonction membre}
+Lorsqu'une fonction membre utilise un autre objet, elle peut le manipuler par valeur, par référence, ou par référence constante.
+
+\textbf{Exemple 1 : Transmission par référence}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Rectangle {
+public:
+    double largeur, hauteur;
+
+    void copier(const Rectangle& autre) {
+        largeur = autre.largeur;
+        hauteur = autre.hauteur;
+    }
+};
+
+Rectangle r1{5, 3}, r2;
+r2.copier(r1); // Copie les dimensions de r1 dans r2
+std::cout << r2.largeur << " x " << r2.hauteur; // Affiche : 5 x 3
+\end{verbatim}
+\end{tcolorbox}
+\textbf{Exemple 2 : Transmission par valeur}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Rectangle {
+public:
+    double largeur, hauteur;
+
+    Rectangle doubler(Rectangle autre) {
+        autre.largeur *= 2;
+        autre.hauteur *= 2;
+        return autre;
+    }
+};
+
+Rectangle r1{4, 5};
+Rectangle r2 = r1.doubler(r1); // r1 n'est pas modifié
+std::cout << r2.largeur << " x " << r2.hauteur; // Affiche : 8 x 10
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Mode de transmission des objets}
+Les objets peuvent être transmis de différentes manières. Passer par référence est souvent plus efficace pour éviter les copies inutiles.
+
+\textbf{Exemple : Transmission par référence constante}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Point {
+public:
+    int x, y;
+
+    void afficher(const Point& autre) const {
+        std::cout << autre.x << ", " << autre.y;
+    }
+};
+
+Point p1{3, 7}, p2{4, 8};
+p1.afficher(p2); // Affiche : 4, 8
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Fonction renvoyant un objet}
+Une fonction membre peut retourner un nouvel objet ou une copie d’un objet existant.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Point {
+public:
+    int x, y;
+
+    Point ajouter(const Point& autre) const {
+        return Point{x + autre.x, y + autre.y};
+    }
+};
+
+Point p1{2, 3}, p2{4, 5};
+Point p3 = p1.ajouter(p2); // Retourne un nouveau point (6, 8)
+std::cout << p3.x << ", " << p3.y; // Affiche : 6, 8
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Autoréférence : \texttt{this}}
+Le mot-clé \texttt{this} est un pointeur implicite vers l'objet courant. Il est utile pour retourner l'objet lui-même ou différencier les membres des paramètres.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Point {
+public:
+    int x, y;
+
+    Point& setX(int val) {
+        x = val;
+        return *this; // Retourne l'objet courant
+    }
+
+    Point& setY(int val) {
+        y = val;
+        return *this;
+    }
+};
+
+Point p;
+p.setX(5).setY(10); // Chaîne les appels
+std::cout << p.x << ", " << p.y; // Affiche : 5, 10
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Fonctions membres statiques}
+Les fonctions statiques n'opèrent que sur des données statiques de la classe et ne nécessitent pas d'instance pour être appelées.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Compteur {
+private:
+    static int total;
+
+public:
+    static void incrementer() { total++; }
+    static int getTotal() { return total; }
+};
+
+int Compteur::total = 0;
+
+Compteur::incrementer();
+std::cout << "Total : " << Compteur::getTotal(); // Affiche : Total : 1
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Fonctions membres et objets constants}
+Une fonction constante (\texttt{const}) garantit qu’elle ne modifie pas l'objet courant.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+class Point {
+private:
+    int x, y;
+
+public:
+    Point(int a, int b) : x(a), y(b) {}
+
+    int getX() const { return x; } // Méthode constante
+    int getY() const { return y; }
+};
+
+const Point p{2, 3};
+std::cout << p.getX(); // Valide, car getX est const
+\end{verbatim}
+\end{tcolorbox}
+---
+
+\subsection{ Objets automatiques et statiques}
+Les objets automatiques sont détruits en fin de portée, tandis que les objets statiques persistent pendant toute l'exécution du programme.
+
+\textbf{Exemple :}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Attributs et Méthodes Statistiques, float=htb]
+\begin{verbatim}
+void exemple() {
+    static int compteur = 0; // Persiste entre les appels
+    compteur++;
+    std::cout << "Compteur : " << compteur << "\n";
+}
+
+int main() {
+    exemple(); // Compteur : 1
+    exemple(); // Compteur : 2
+}
+\end{verbatim}
+\end{tcolorbox}

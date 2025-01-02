@@ -1,0 +1,107 @@
+% Résumé pour 02_Bases_Operateurs
+\section{ Résumé: 02\_Bases et Opérateurs}
+
+\subsection{ Identificateurs et Mots-clés}
+\begin{itemize}
+    \item Les \textbf{identificateurs} sont les noms donnés aux variables, fonctions, etc. :
+    \begin{itemize}
+        \item Doivent commencer par une lettre ou un \texttt{\_}.
+        \item Ne doivent pas contenir d'espaces ou de caractères spéciaux.
+        \item Exemple : \texttt{maVariable}, \texttt{\_compteur}.
+    \end{itemize}
+    \item \textbf{Mots-clés} réservés par C++ (ne peuvent pas être utilisés comme identificateurs) :
+    \begin{itemize}
+        \item Exemple : \texttt{int}, \texttt{return}, \texttt{while}.
+    \end{itemize}
+\end{itemize}
+
+\subsection{ Notion de Types}
+En C++, chaque variable a un \textbf{type}. Voici les types principaux :
+\begin{itemize}
+    \item \textbf{Entiers} : \texttt{int}, \texttt{short}, \texttt{long}.
+    \item \textbf{Flottants} : \texttt{float}, \texttt{double}.
+    \item \textbf{Caractères} : \texttt{char}.
+    \item \textbf{Booléens} : \texttt{bool} (\texttt{true} ou \texttt{false}).
+\end{itemize}
+
+\textbf{Exemple} :
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Types]
+\begin{verbatim}
+int age = 25;      // Entier
+float taille = 1.8; // Nombre décimal
+bool majeur = true; // Booléen
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Variables et Constantes}
+\begin{itemize}
+    \item \textbf{Variable} : zone mémoire dont la valeur peut changer.
+    \item \textbf{Constante} : valeur fixe, définie avec \texttt{const}.
+\end{itemize}
+
+\textbf{Exemple} :
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Variables et Constantes]
+\begin{verbatim}
+const double PI = 3.14; // Constante
+int score = 100;        // Variable
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Opérateurs et Expressions}
+Les \textbf{opérateurs} sont utilisés pour manipuler les données. Voici les principaux :
+\begin{itemize}
+    \item \textbf{Arithmétiques} : \texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}, \texttt{\%}.
+    \item \textbf{Relationnels} : \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}, \texttt{==}, \texttt{!=}.
+    \item \textbf{Logiques} : \texttt{\&\&}, \texttt{||}, \texttt{!}.
+    \item \textbf{Assignation} : \texttt{=}, \texttt{+=}, \texttt{-=}, \texttt{*=}, \texttt{/=}.
+\end{itemize}
+
+\textbf{Exemple} :
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple d'Opérateurs et Expressions]
+\begin{verbatim}
+int a = 5, b = 2;
+int somme = a + b;   // Résultat : 7
+bool test = a > b;   // Résultat : true
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Priorité des Opérateurs}
+Les opérateurs ont une priorité. Par exemple :
+\begin{itemize}
+    \item \texttt{*} et \texttt{/} sont évalués avant \texttt{+} et \texttt{-}.
+    \item Utilisez des \textbf{parenthèses} pour clarifier les expressions.
+\end{itemize}
+
+\textbf{Exemple} :
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Priorité des Opérateurs]
+\begin{verbatim}
+int resultat = 5 + 3 * 2;      // Résultat : 11 (3 * 2 évalué en premier)
+int resultat2 = (5 + 3) * 2;   // Résultat : 16 (parenthèses prioritaires)
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Cast (Conversions de Type)}
+Pour changer le type d'une variable, utilisez un \textbf{cast} :
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemple de Cast]
+\begin{verbatim}
+int a = 5;
+double b = (double)a; // Convertit a en double
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{ Exemples d'Utilisation}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!5!white, title=Exemples d'Utilisation]
+\begin{verbatim}
+// Calcul simple
+int a = 10, b = 3;
+cout << "Somme : " << (a + b) << endl;  // Affiche 13
+cout << "Division : " << (a / b) << endl;  // Affiche 3 (division entière)
+cout << "Modulo : " << (a % b) << endl;  // Affiche 1
+
+// Boucle for basée sur une plage
+vector<int> nombres = {1, 2, 3, 4, 5};
+for (int n : nombres) {
+    cout << n << " ";
+} // <-- Add this closing brace
+\end{verbatim}
+\end{tcolorbox}
