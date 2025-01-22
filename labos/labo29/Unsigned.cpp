@@ -1,39 +1,35 @@
 /**
  * @file nicolas_reymond_labo24.cpp
- * @author Nicolas Reymond (nicolas.reymond@heig-vd.ch)
- * @brief Labo sur les classes et la manipulation d'entiers non-signés. Ce fichier contient également le labo 25
+ * @brief Lab on classes and manipulation of unsigned integers. This file also contains lab 25.
  * @version 0.1
  * @date 02.12.2024
- * 
- * @copyright Copyright (c) 2024
  * 
  */
 #include "Unsigned.hpp"
 #include <cmath>
 
-//----------------------------------------------------- Méthodes et surcharges de la Classe Unsigned -----------------------------------------------//
 
-//Valeur par défaut de la base (10)
+// Default base value (10)
 int Unsigned::base = 10;
 
-string Unsigned::data()const{
+string Unsigned::data() const {
     return valeur;
 }
 
 /**
  * @brief Construct a new Unsigned:: Unsigned object
  * 
- * @param binaire Nombre en binaire sous forme de string
+ * @param binaire Binary number as a string
  */
-Unsigned::Unsigned(string binaire){
-    //Vérifie que la chaine soit bien un nombre binaire
+Unsigned::Unsigned(string binaire) {
+    // Verify that the string is a binary number
     for (char bit : binaire) {
         if (bit != '0' && bit != '1') {
             throw std::invalid_argument("Ill-formed string for Unsigned");
         }
     }
-    //Enlève les zéros en début de chaine si nécessaire
-    while(binaire.size() > 1 && binaire.front() == '0'){
+    // Remove leading zeros if necessary
+    while (binaire.size() > 1 && binaire.front() == '0') {
         binaire.erase(binaire.begin());
     }
     valeur = binaire;
@@ -42,122 +38,130 @@ Unsigned::Unsigned(string binaire){
 /**
  * @brief Construct a new Unsigned:: Unsigned object
  * 
- * @param n nombre non-signé à convertir en binaire
+ * @param n Unsigned number to convert to binary
  */
-Unsigned::Unsigned(uint64_t n){
+Unsigned::Unsigned(uint64_t n) {
     valeur = "";
-    if(n == 0) valeur = "0";
-    while(n > 0){
-        valeur =  to_string(n % 2) + valeur;
-        n/=2;
+    if (n == 0) valeur = "0";
+    while (n > 0) {
+        valeur = to_string(n % 2) + valeur;
+        n /= 2;
     }
 }
+
 /**
- * @brief Surcharge de l'opérateur plus petit que pour la classe Unsigned
+ * @brief Overload the less than operator for the Unsigned class
  * 
  * @param a Unsigned a
  * @param b Unsigned b
  * @return true 
  * @return false 
  */
-bool operator<(const Unsigned& a, const Unsigned& b){
+bool operator<(const Unsigned& a, const Unsigned& b) {
     if (a.valeur.size() != b.valeur.size())
-        return a.valeur.size() < b.valeur.size(); // Plus long est plus grand
-    return a.valeur < b.valeur; // Comparaison lexicographique
+        return a.valeur.size() < b.valeur.size(); // Longer is larger
+    return a.valeur < b.valeur; // Lexicographical comparison
 }
+
 /**
- * @brief Surcharge de l'opérateur '<=' pour la classe Unsigned
+ * @brief Overload the <= operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return true 
  * @return false 
  */
-bool operator<=(const Unsigned& a, const Unsigned& b){
+bool operator<=(const Unsigned& a, const Unsigned& b) {
     return !(b < a);
 }
+
 /**
- * @brief Surcharge de l'opérateur '>' pour la classe Unsigned
+ * @brief Overload the > operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return true 
  * @return false 
  */
-bool operator>(const Unsigned& a, const Unsigned& b){
+bool operator>(const Unsigned& a, const Unsigned& b) {
     return b < a;
 }
+
 /**
- * @brief Surcharge de l'opérateur '>=' pour la classe Unsigned
+ * @brief Overload the >= operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return true 
  * @return false 
  */
-bool operator>=(const Unsigned& a, const Unsigned& b){
-    return (!(a<b));
+bool operator>=(const Unsigned& a, const Unsigned& b) {
+    return !(a < b);
 }
+
 /**
- * @brief Surcharge de l'opérateur == pour la classe Unsigned
+ * @brief Overload the == operator for the Unsigned class
  * 
  * @param a Unsigned a
- * @param a Unsigned b
+ * @param b Unsigned b
  * @return true 
  * @return false 
  */
-bool operator==(const Unsigned& a, const Unsigned & b){
+bool operator==(const Unsigned& a, const Unsigned& b) {
     return (a.valeur == b.valeur);
 }
+
 /**
- * @brief Surcharge de l'opérateur '!=' pour la classe Unsigned
+ * @brief Overload the != operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return true 
  * @return false 
  */
-bool operator!=(const Unsigned& a, const Unsigned& b){
+bool operator!=(const Unsigned& a, const Unsigned& b) {
     return !(a == b);
 }
+
 /**
- * @brief Surcharge de l'opérateur += pour la classe Unsigned
+ * @brief Overload the += operator for the Unsigned class
  * 
- * @param a Objet subissant l'opération
- * @param b Objet à ajouter
+ * @param a Object undergoing the operation
+ * @param b Object to add
  * @return Unsigned& 
  */
-Unsigned& operator+=(Unsigned& a, const Unsigned& b){
+Unsigned& operator+=(Unsigned& a, const Unsigned& b) {
     string resultat("");
-    size_t i = a.valeur.size(); // Indice de la chaîne a
-    size_t j = b.valeur.size(); // Indice de la chaîne b
-    int retenue = 0;        // Retenue
+    size_t i = a.valeur.size(); // Index of the a string
+    size_t j = b.valeur.size(); // Index of the b string
+    int retenue = 0; // Carry
 
-    // Parcourir les deux chaînes
+    // Traverse both strings
     while (i > 0 || j > 0 || retenue) {
-        int bitA = (i > 0) ? a.valeur[--i] - '0' : 0; // Bit actuel de a ou 0 si i == 0
-        int bitB = (j > 0) ? b.valeur[--j] - '0' : 0; // Bit actuel de b ou 0 si j == 0
+        int bitA = (i > 0) ? a.valeur[--i] - '0' : 0; // Current bit of a or 0 if i == 0
+        int bitB = (j > 0) ? b.valeur[--j] - '0' : 0; // Current bit of b or 0 if j == 0
 
-        int sum = bitA + bitB + retenue; // Somme des bits + retenue
-        resultat += (sum % 2) + '0';     // Ajouter le bit résultant à la chaîne
-        retenue = sum / 2;               // Calculer la nouvelle retenue
+        int sum = bitA + bitB + retenue; // Sum of bits + carry
+        resultat += (sum % 2) + '0'; // Add the resulting bit to the string
+        retenue = sum / 2; // Calculate the new carry
     }
 
-    // La chaîne résultante est inversée, car nous avons construit le résultat de droite à gauche
+    // The resulting string is reversed because we built the result from right to left
     std::reverse(resultat.begin(), resultat.end());
 
     a.valeur = resultat;
     return a;
 }
+
 /**
- * @brief Surcharge de l'opérateur -= pour la classe Unsigned
+ * @brief Overload the -= operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return Unsigned& 
  */
-Unsigned& operator-=(Unsigned& a, const Unsigned& b){
-    // Vérifie que b est plus petit que a pour que le résultat ne soit pas négatif
+Unsigned& operator-=(Unsigned& a, const Unsigned& b) {
+    // Verify that b is smaller than a so that the result is not negative
     if (a < b) throw range_error("Negative result");
     string resultat("");
     size_t i = a.valeur.size();
@@ -165,8 +169,8 @@ Unsigned& operator-=(Unsigned& a, const Unsigned& b){
     int retenue = 0;
 
     while (i > 0 || j > 0 || retenue) {
-        int bitA = (i > 0) ? a.valeur[--i] - '0' : 0; // Bit actuel de a ou 0 si i == 0
-        int bitB = (j > 0) ? b.valeur[--j] - '0' : 0; // Bit actuel de b ou 0 si j == 0
+        int bitA = (i > 0) ? a.valeur[--i] - '0' : 0; // Current bit of a or 0 if i == 0
+        int bitB = (j > 0) ? b.valeur[--j] - '0' : 0; // Current bit of b or 0 if j == 0
 
         bitA -= retenue;
 
@@ -176,156 +180,162 @@ Unsigned& operator-=(Unsigned& a, const Unsigned& b){
         } else {
             retenue = 0;
         }
-        resultat += (bitA - bitB) + '0'; // Ajouter le bit résultant à la chaîne
+        resultat += (bitA - bitB) + '0'; // Add the resulting bit to the string
     }
 
-    // Supprimer les zéros de tête
+    // Remove leading zeros
     while (resultat.size() > 1 && resultat.back() == '0') {
         resultat.pop_back();
     }
 
-    // La chaîne résultante est inversée, car nous avons construit le résultat de droite à gauche
+    // The resulting string is reversed because we built the result from right to left
     reverse(resultat.begin(), resultat.end());
 
     a.valeur = resultat;
     return a;
 }
+
 /**
- * @brief Surcharge de l'opérateur + pour la classe Unsigned
+ * @brief Overload the + operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return Unsigned 
  */
-Unsigned operator+(Unsigned a, const Unsigned& b){
+Unsigned operator+(Unsigned a, const Unsigned& b) {
     return a += b;
 }
+
 /**
- * @brief Surcharge de l'opérateur - pour la classe Unsigned
+ * @brief Overload the - operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return Unsigned 
  */
-Unsigned operator-(Unsigned a, const Unsigned & b){
+Unsigned operator-(Unsigned a, const Unsigned& b) {
     return a -= b;
 }
+
 /**
- * @brief Surcharge de l'opérateur *= pour la classe Unsigned
+ * @brief Overload the *= operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return Unsigned& 
  */
-Unsigned& operator*=(Unsigned& a, const Unsigned & b){
-    int i = a.valeur.size() -1;
-    int j = b.valeur.size() -1;
+Unsigned& operator*=(Unsigned& a, const Unsigned& b) {
+    int i = a.valeur.size() - 1;
+    int j = b.valeur.size() - 1;
     Unsigned resultat(0);
     string offset("");
 
-    for(int i = a.valeur.size() -1; i >= 0; i--){
-        //String de la multiplication actuelle avec l'offset
+    for (int i = a.valeur.size() - 1; i >= 0; i--) {
+        // String of the current multiplication with the offset
         string multi(offset);
-        int bitA = a.valeur[i] - '0'; // Bit actuel de a
-        for(int j = b.valeur.size() -1; j >= 0; j--){
-            int bitB = b.valeur[j] - '0'; // Bit actuel de b
+        int bitA = a.valeur[i] - '0'; // Current bit of a
+        for (int j = b.valeur.size() - 1; j >= 0; j--) {
+            int bitB = b.valeur[j] - '0'; // Current bit of b
             multi += to_string(bitA * bitB);
         }
         reverse(multi.begin(), multi.end());
         resultat += Unsigned(multi);
-        //Décallage vers la gauche
-        offset+='0';
+        // Shift to the left
+        offset += '0';
     }
 
     a = resultat;
     return a;
 }
+
 /**
- * @brief Surcharge de l'opérateur * pour la classe Unsigned
+ * @brief Overload the * operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return Unsigned 
  */
-Unsigned operator*(Unsigned a, const Unsigned & b){
+Unsigned operator*(Unsigned a, const Unsigned& b) {
     return a *= b;
 }
+
 /**
- * @brief Calcule la division entière de a par b ainsi que le reste
+ * @brief Calculate the integer division of a by b and the remainder
  * 
- * @param a Dividende
- * @param b Diviseur
- * @return pair<Unsigned,Unsigned> quotient, reste
+ * @param a Dividend
+ * @param b Divisor
+ * @return pair<Unsigned, Unsigned> quotient, remainder
  */
-pair<Unsigned,Unsigned> Unsigned::quotient_reste(const Unsigned & a, const Unsigned & b){
-    if(b.valeur == "0") throw runtime_error("Division by 0");
-    if(a<b) return pair<Unsigned,Unsigned>(Unsigned("0"),a);
+pair<Unsigned, Unsigned> Unsigned::quotient_reste(const Unsigned& a, const Unsigned& b) {
+    if (b.valeur == "0") throw runtime_error("Division by 0");
+    if (a < b) return pair<Unsigned, Unsigned>(Unsigned("0"), a);
 
     Unsigned quotient(0), reste(0);
 
-    for(char bit : a.valeur){
-        reste.valeur+=bit;
-        if(reste.valeur[0] == '0') reste.valeur.erase(0,1);
-        if(reste<b){
+    for (char bit : a.valeur) {
+        reste.valeur += bit;
+        if (reste.valeur[0] == '0') reste.valeur.erase(0, 1);
+        if (reste < b) {
             quotient.valeur += '0';
-        }
-        else{
+        } else {
             reste -= b;
             quotient.valeur += '1';
         }
     }
 
-    //Supression des zéros au début du quotient
+    // Remove leading zeros from the quotient
     while (quotient.valeur.size() > 1 && quotient.valeur[0] == '0') {
         quotient.valeur.erase(0, 1);
     }
 
     return {quotient, reste};
 }
+
 /**
- * @brief Surcharge de la fonction '/=' pour la classe Unsigned
+ * @brief Overload the /= operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return Unsigned& 
  */
-Unsigned& operator/=(Unsigned& a, const Unsigned & b){
-    a = Unsigned::quotient_reste(a,b).first;
+Unsigned& operator/=(Unsigned& a, const Unsigned& b) {
+    a = Unsigned::quotient_reste(a, b).first;
     return a;
 }
+
 /**
- * @brief Surcharge de la fonction '/' pour la classe Unsigned
+ * @brief Overload the / operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return Unsigned 
  */
-Unsigned operator/(Unsigned a, const Unsigned& b){
-    return Unsigned::quotient_reste(a,b).first;
+Unsigned operator/(Unsigned a, const Unsigned& b) {
+    return Unsigned::quotient_reste(a, b).first;
 }
 
-Unsigned& operator%=(Unsigned& a, const Unsigned & b){
-    a = Unsigned::quotient_reste(a,b).second;
+Unsigned& operator%=(Unsigned& a, const Unsigned& b) {
+    a = Unsigned::quotient_reste(a, b).second;
     return a;
 }
 
 /**
- * @brief Surcharge de la fonction '%' pour la classe Unsigned
+ * @brief Overload the % operator for the Unsigned class
  * 
  * @param a 
  * @param b 
  * @return Unsigned 
  */
-Unsigned operator%(Unsigned a, const Unsigned& b){
-    return Unsigned::quotient_reste(a,b).second;
+Unsigned operator%(Unsigned a, const Unsigned& b) {
+    return Unsigned::quotient_reste(a, b).second;
 }
 
 /**
- * @brief Convertit un Unsigned dans la base demandée. Si la base est 2, retourne la valeur directement
+ * @brief Convert an Unsigned to the requested base. If the base is 2, return the value directly
  * 
- * @return string : Valeur convertie
+ * @return string : Converted value
  */
-string Unsigned::convertirEnBase() const {
+string Unsigned::convertToBase() const {
     if (this->base == 2) return this->valeur; // If base is binary, return the value directly
 
     const char nombres[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -341,71 +351,75 @@ string Unsigned::convertirEnBase() const {
 
     return resultat.empty() ? "0" : resultat;
 }
+
 /**
- * @brief Surcharge de l'opérateur '<<' pour la classe Unsigned
+ * @brief Overload the << operator for the Unsigned class
  * 
- * @param os Stream de sortie
- * @param a Objet à imprimer
+ * @param os Output stream
+ * @param a Object to print
  * @return ostream& 
  */
-ostream& operator<<(ostream& os, const Unsigned& a){
-    os << a.convertirEnBase();
+ostream& operator<<(ostream& os, const Unsigned& a) {
+    os << a.convertToBase();
     return os;
 }
+
  /**
-  * @brief Surcharge de l'opérateur '++' post-fixé pour la classe Unsigned
+  * @brief Overload the post-increment operator for the Unsigned class
   * 
   * @param a 
   * @return Unsigned 
   */
-Unsigned operator++(Unsigned& a, int){
+Unsigned operator++(Unsigned& a, int) {
     Unsigned copie = a;
-    a+=Unsigned(1);
+    a += Unsigned(1);
     return copie;
 }
+
 /**
- * @brief Surcharge de l'opérateur '++' pré-fixé pour la classe Unsigned
+ * @brief Overload the pre-increment operator for the Unsigned class
  * 
  * @param a 
  * @return Unsigned& 
  */
- Unsigned& operator++(Unsigned& a){
-    return a+=Unsigned(1);
- }
+Unsigned& operator++(Unsigned& a) {
+    return a += Unsigned(1);
+}
+
 /**
- * @brief Surcharge de l'opérateur '--' post-fixé pour la classe Unsigned
+ * @brief Overload the post-decrement operator for the Unsigned class
  * 
  * @param a 
  * @return Unsigned 
  */
- Unsigned operator--(Unsigned& a, int){
+Unsigned operator--(Unsigned& a, int) {
     Unsigned copie = a;
-    a-=Unsigned(1);
+    a -= Unsigned(1);
     return copie;
- }
+}
+
 /**
- * @brief Surcharge de l'opérateur '--' pré-fixé pour la classe Unsigned
+ * @brief Overload the pre-decrement operator for the Unsigned class
  * 
  * @param a 
  * @return Unsigned& 
  */
- Unsigned& operator--(Unsigned& a){
-    return a-=Unsigned(1);
- }
+Unsigned& operator--(Unsigned& a) {
+    return a -= Unsigned(1);
+}
+
 /**
- * @brief Converti un objet de la classe Unsigned en uint_64
+ * @brief Convert an Unsigned object to uint64_t
  * 
  * @return uint64_t 
  */
-Unsigned::operator uint64_t() const{
+Unsigned::operator uint64_t() const {
     uint64_t decimal = 0;
     uint64_t basePower = 1;
 
-    // Convertit la chaîne binaire en valeur décimale
-    for (int i = valeur.size() - 1; i >= 0; --i)
-    {
-        if (valeur[i] == '1')
-        {
+    // Convert the binary string to decimal value
+    for (int i = valeur.size() - 1; i >= 0; --i) {
+        if (valeur[i] == '1') {
             decimal += basePower;
         }
         basePower *= 2;
@@ -415,40 +429,39 @@ Unsigned::operator uint64_t() const{
 }
 
 /**
- * @brief Génère un nombre aléatoire de la taille souhaitée
+ * @brief Generate a random number of the desired size
  * 
- * @param length Taille du nombre
+ * @param length Size of the number
  * @return Unsigned 
  */
-Unsigned Unsigned::random(size_t length){
+Unsigned Unsigned::random(size_t length) {
     string resultat = "";
-    for(size_t i = 0; i < length; i++){
-        resultat += to_string(rand()%2);
+    for (size_t i = 0; i < length; i++) {
+        resultat += to_string(rand() % 2);
     }
     return Unsigned(resultat);
 }
-//----------------------------------------------------- Méthodes et surcharges de la Classe Setbase -----------------------------------------------//
 
  /**
- * @brief Surcharge de l'opérateur pour la classe Setbase. A un rôle passif, permet de ne rien retourner lors de l'appel dans un cout.
+ * @brief Overload the operator for the Setbase class. Has a passive role, allows nothing to be returned when called in a cout.
  * 
- * @param os Stream de sortie
+ * @param os Output stream
  * @return ostream& 
  */
-ostream& operator<<(ostream& os, Setbase){
+ostream& operator<<(ostream& os, Setbase) {
     return os;
 }
+
 /**
- * @brief Modifie la base dans la classe Unsigned pour que l'affichage soit fait dans la base souhaitée
+ * @brief Modify the base in the Unsigned class so that the display is done in the desired base
  * 
  * @param base 
  * @return Setbase 
  */
-Setbase Setbase::set_base(int base){
+Setbase Setbase::set_base(int base) {
     if (base < 2 || base > 36) {
         Unsigned::base = 10;
-    }
-    else{
+    } else {
         Unsigned::base = base;
     }
     return Setbase();

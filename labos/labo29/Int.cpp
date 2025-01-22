@@ -1,46 +1,43 @@
 /**
  * @file nicolas_reymond_labo26.cpp
- * @author Nicolas Reymond (nolan.evard@bluewin.ch)
- * @brief Labo sur les classes et la manipulation d'entiers signés
+ * @brief Lab on classes and manipulation of signed integers
  * @version 0.1
  * @date 17.12.2024
- * 
- * @copyright Copyright (c) 2024
  * 
  */
 #include "Int.hpp"
 
 /**
- * @brief Constructeur de la classe Int
- * @param valeur Valeur non signée
- * @param signe Booléen indiquant si la valeur est négative
+ * @brief Constructor for the Int class
+ * @param valeur Unsigned value
+ * @param signe Boolean indicating if the value is negative
  */
 Int::Int(Unsigned valeur, bool signe) : valeur(valeur), signe(signe) {}
 
 /**
- * @brief Constructeur de la classe Int à partir d'un entier
- * @param valeur Valeur entière
+ * @brief Constructor for the Int class from an integer
+ * @param valeur Integer value
  */
 Int::Int(int valeur) : valeur(Unsigned(valeur < 0 ? -valeur : valeur)), signe(valeur < 0) {}
 
 /**
- * @brief Opérateur unaire de négation
- * @return Un nouvel objet Int avec le signe inversé
+ * @brief Unary negation operator
+ * @return A new Int object with the sign inverted
  */
-Int Int::operator-() const{
+Int Int::operator-() const {
     return Int(valeur, !signe);
 }
 
 /**
- * @brief Opérateur d'addition et d'affectation
- * @param b Référence sur l'objet Int à ajouter
- * @return Référence sur l'objet Int modifié
+ * @brief Addition and assignment operator
+ * @param b Reference to the Int object to add
+ * @return Reference to the modified Int object
  */
-Int& Int::operator+=(const Int& b){
-    if(signe == b.signe) {
+Int& Int::operator+=(const Int& b) {
+    if (signe == b.signe) {
         valeur += b.valeur;
     } else {
-        if(valeur < b.valeur) {
+        if (valeur < b.valeur) {
             valeur = b.valeur - valeur;
             signe = !signe;
         } else {
@@ -51,15 +48,15 @@ Int& Int::operator+=(const Int& b){
 }
 
 /**
- * @brief Opérateur de soustraction et d'affectation
- * @param b Référence sur l'objet Int à soustraire
- * @return Référence sur l'objet Int modifié
+ * @brief Subtraction and assignment operator
+ * @param b Reference to the Int object to subtract
+ * @return Reference to the modified Int object
  */
-Int& Int::operator-=(const Int& b){
-    if(signe != b.signe) {
+Int& Int::operator-=(const Int& b) {
+    if (signe != b.signe) {
         valeur += b.valeur;
     } else {
-        if(valeur < b.valeur) {
+        if (valeur < b.valeur) {
             valeur = b.valeur - valeur;
             signe = !signe;
         } else {
@@ -70,185 +67,187 @@ Int& Int::operator-=(const Int& b){
 }
 
 /**
- * @brief Opérateur de multiplication et d'affectation
- * @param b Référence sur l'objet Int à multiplier
- * @return Référence sur l'objet Int modifié
+ * @brief Multiplication and assignment operator
+ * @param b Reference to the Int object to multiply
+ * @return Reference to the modified Int object
  */
-Int& Int::operator*=(const Int& b){
+Int& Int::operator*=(const Int& b) {
     valeur *= b.valeur;
     signe = signe != b.signe;
     return *this;
 }
 
 /**
- * @brief Opérateur de division et d'affectation
- * @param b Référence sur l'objet Int à diviser
- * @return Référence sur l'objet Int modifié
+ * @brief Division and assignment operator
+ * @param b Reference to the Int object to divide
+ * @return Reference to the modified Int object
  */
-Int& Int::operator/=(const Int& b){
+Int& Int::operator/=(const Int& b) {
     valeur /= b.valeur;
     signe = signe != b.signe;
     return *this;
 }
 
 /**
- * @brief Opérateur de modulo et d'affectation
- * @param b Référence sur l'objet Int à diviser
- * @return Référence sur l'objet Int modifié
+ * @brief Modulo and assignment operator
+ * @param b Reference to the Int object to divide
+ * @return Reference to the modified Int object
  */
-Int& Int::operator%=(const Int& b){
+Int& Int::operator%=(const Int& b) {
     valeur %= b.valeur;
-    if(valeur == Unsigned(0)) signe = false;
+    if (valeur == Unsigned(0)) signe = false;
     else signe = signe != b.signe;
     return *this;
 }
 
 /**
- * @brief Opérateur d'addition
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Un nouvel objet Int résultant de l'addition
+ * @brief Addition operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return A new Int object resulting from the addition
  */
-Int Int::operator+(const Int& b)const{
+Int Int::operator+(const Int& b) const {
     Int copie = *this;
     copie += b;
     return copie;
 }
 
 /**
- * @brief Opérateur de soustraction
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Un nouvel objet Int résultant de la soustraction
+ * @brief Subtraction operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return A new Int object resulting from the subtraction
  */
-Int Int::operator-(const Int& b)const{
+Int Int::operator-(const Int& b) const {
     Int copie = *this;
     copie -= b;
     return copie;
 }
 
 /**
- * @brief Opérateur de multiplication
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Un nouvel objet Int résultant de la multiplication
+ * @brief Multiplication operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return A new Int object resulting from the multiplication
  */
-Int Int::operator*(const Int& b)const{
+Int Int::operator*(const Int& b) const {
     Int copie = *this;
     copie *= b;
     return copie;
 }
 
 /**
- * @brief Opérateur de division
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Un nouvel objet Int résultant de la division
+ * @brief Division operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return A new Int object resulting from the division
  */
-Int Int::operator/(const Int& b)const{
+Int Int::operator/(const Int& b) const {
     Int copie = *this;
     copie /= b;
     return copie;
 }
 
 /**
- * @brief Opérateur de modulo
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Un nouvel objet Int résultant du modulo
+ * @brief Modulo operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return A new Int object resulting from the modulo
  */
-Int Int::operator%(const Int& b)const{
+Int Int::operator%(const Int& b) const {
     Int copie = *this;
     copie %= b;
     return copie;
 }
 
 /**
- * @brief Opérateur de comparaison inférieure
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Vrai si a est inférieur à b, faux sinon
+ * @brief Less than comparison operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return True if a is less than b, false otherwise
  */
 bool Int::operator<(const Int& b) const {
-    if(signe && not(b.signe)) return true;
-    if(not(signe) && b.signe) return false;
-    if(signe && b.signe) return valeur > b.valeur;
+    if (signe && not(b.signe)) return true;
+    if (not(signe) && b.signe) return false;
+    if (signe && b.signe) return valeur > b.valeur;
     return valeur < b.valeur;
 }
+
 /**
- * @brief Opérateur d'égalité
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Vrai si a est égal à b, faux sinon
+ * @brief Equality comparison operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return True if a is equal to b, false otherwise
  */
 bool Int::operator==(const Int& b) const {
     return valeur == b.valeur && signe == b.signe;
 }
 
 /**
- * @brief Opérateur de comparaison inférieure ou égale
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Vrai si a est inférieur ou égal à b, faux sinon
+ * @brief Less than or equal to comparison operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return True if a is less than or equal to b, false otherwise
  */
 bool Int::operator<=(const Int& b) const {
     return (*this < b || *this == b);
 }
 
 /**
- * @brief Opérateur de comparaison supérieure
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Vrai si a est supérieur à b, faux sinon
+ * @brief Greater than comparison operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return True if a is greater than b, false otherwise
  */
 bool Int::operator>(const Int& b) const {
     return (not(*this < b) && *this != b);
 }
+
 /**
- * @brief Opérateur de comparaison supérieure ou égale
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Vrai si a est supérieur ou égal à b, faux sinon
+ * @brief Greater than or equal to comparison operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return True if a is greater than or equal to b, false otherwise
  */
 bool Int::operator>=(const Int& b) const {
     return (not(*this < b));
 }
 
 /**
- * @brief Opérateur de différence
- * @param a Référence sur le premier objet Int
- * @param b Référence sur le deuxième objet Int
- * @return Vrai si a est différent de b, faux sinon
+ * @brief Inequality comparison operator
+ * @param a Reference to the first Int object
+ * @param b Reference to the second Int object
+ * @return True if a is not equal to b, false otherwise
  */
 bool Int::operator!=(const Int& b) const {
     return (valeur != b.valeur || signe != b.signe);
 }
 
 /**
- * @brief Opérateur de flux de sortie
- * @param os Référence sur le flux de sortie
- * @param a Référence sur l'objet Int à afficher
- * @return Référence sur le flux de sortie
+ * @brief Output stream operator
+ * @param os Reference to the output stream
+ * @param a Reference to the Int object to display
+ * @return Reference to the output stream
  */
-ostream& operator<<(ostream& os, const Int& a){
-    if(a.signe) os << '-';
+ostream& operator<<(ostream& os, const Int& a) {
+    if (a.signe) os << '-';
     ios_base::fmtflags f(os.flags());
-    if(f & ios_base::showpos) os << (a.signe ? "-":"+");
-    if(f & ios_base::hex) os << Setbase::set_base(16);
-    else if(f & ios_base::oct) os << Setbase::set_base(8);
-    else if(f & ios_base::dec) os << Setbase::set_base(10);
-    else if(f & ios_base::binary) os << Setbase::set_base(2);
+    if (f & ios_base::showpos) os << (a.signe ? "-" : "+");
+    if (f & ios_base::hex) os << Setbase::set_base(16);
+    else if (f & ios_base::oct) os << Setbase::set_base(8);
+    else if (f & ios_base::dec) os << Setbase::set_base(10);
+    else if (f & ios_base::binary) os << Setbase::set_base(2);
     os << a.valeur;
     return os;
 }
 
 /**
- * @brief Opérateur de flux d'entrée
- * @param is Référence sur le flux d'entrée
- * @param a Référence sur l'objet Int à modifier
- * @return Référence sur le flux d'entrée
+ * @brief Input stream operator
+ * @param is Reference to the input stream
+ * @param a Reference to the Int object to modify
+ * @return Reference to the input stream
  */
-istream& operator>>(istream& is, Int& a){
+istream& operator>>(istream& is, Int& a) {
     string str;
     getline(is, str);
     a = Int(stoi(str));
@@ -256,51 +255,43 @@ istream& operator>>(istream& is, Int& a){
 }
 
 /**
- * @brief Opérateur d'incrémentation postfixée
- * @param a Référence sur l'objet Int à incrémenter
- * @param int Paramètre fictif pour différencier la version postfixée
- * @return Une copie de l'objet Int avant l'incrémentation
+ * @brief Postfix increment operator
+ * @param a Reference to the Int object to increment
+ * @param int Dummy parameter to differentiate the postfix version
+ * @return A copy of the Int object before the increment
  */
-Int Int::operator++(int){
+Int Int::operator++(int) {
     Int copie = *this;
-    *this+=Int(1);
+    *this += Int(1);
     return copie;
 }
 
 /**
- * @brief Opérateur d'incrémentation préfixée
- * @param a Référence sur l'objet Int à incrémenter
- * @return Référence sur l'objet Int après l'incrémentation
+ * @brief Prefix increment operator
+ * @param a Reference to the Int object to increment
+ * @return Reference to the Int object after the increment
  */
-Int& Int::operator++(){
-    return *this+=Int(1);
+Int& Int::operator++() {
+    return *this += Int(1);
 }
 
 /**
- * @brief Opérateur de décrémentation postfixée
- * @param a Référence sur l'objet Int à décrémenter
- * @param int Paramètre fictif pour différencier la version postfixée
- * @return Une copie de l'objet Int avant la décrémentation
+ * @brief Postfix decrement operator
+ * @param a Reference to the Int object to decrement
+ * @param int Dummy parameter to differentiate the postfix version
+ * @return A copy of the Int object before the decrement
  */
-Int Int::operator--(int){
+Int Int::operator--(int) {
     Int copie = *this;
-    *this-=Int(1);
+    *this -= Int(1);
     return copie;
 }
 
 /**
- * @brief Opérateur de décrémentation préfixée
- * @param a Référence sur l'objet Int à décrémenter
- * @return Référence sur l'objet Int après la décrémentation
+ * @brief Prefix decrement operator
+ * @param a Reference to the Int object to decrement
+ * @return Reference to the Int object after the decrement
  */
-Int& Int::operator--(){
-    return *this-=Int(1);
+Int& Int::operator--() {
+    return *this -= Int(1);
 }
-
-// /**
-//  * @brief Conversion de l'objet Int en entier
-//  * @return La valeur entière correspondante
-//  */
-// Int::operator int() const {
-//     return signe ? -static_cast<int>(valeur) : static_cast<int>(valeur);
-// }

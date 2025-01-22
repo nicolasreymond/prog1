@@ -1,11 +1,8 @@
 /**
  * @file nicolas_reymond_labo27.hpp
- * @author Nicolas Reymond (nicolas.reymond@heig-vd.ch)
- * @brief Entêtes de la classe Rationel pour manipuler des nombres rationnels. Repris du laboratoire 12 mais avec de la généricité.
+ * @brief Headers for the Rationnel class to manipulate rational numbers. Taken from lab 12 but with genericity.
  * @version 0.1
  * @date 19.12.2024
- * 
- * @copyright Copyright (c) 2024
  * 
  */
 #ifndef RATIONNEL_H
@@ -15,10 +12,10 @@
 #include <numeric>
 #include <stdexcept>
 
-//Prédéclaration de la classe Rationnel pour les opérateurs de flux
+// Forward declaration of the Rationnel class for stream operators
 template<typename T> class Rationnel;
 
-//Déclaration des opérateurs de flux
+// Declaration of stream operators
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const Rationnel<T>& r);
 
@@ -26,9 +23,9 @@ template<typename T>
 std::istream& operator>>(std::istream& is, Rationnel<T>& r);
 
 /**
- * @brief Classe générique permettant de manipuler des nombres rationnels
+ * @brief Generic class for manipulating rational numbers
  * 
- * @tparam T Type utilisé dans les rationnels (généralement des entiers)
+ * @tparam T Type used in the rationals (usually integers)
  */
 template <typename T>
 class Rationnel {
@@ -36,16 +33,15 @@ private:
     T num;
     T den;
 
-    // Methodes
+    // Methods
     void simplifie();
-    
 
 public:
-    // Constructeurs
+    // Constructors
     Rationnel();
-    Rationnel(T numerateur, T denominateur=1);
+    Rationnel(T numerateur, T denominateur = 1);
 
-    // Opérateurs arithmétiques
+    // Arithmetic operators
     Rationnel<T> operator+(const Rationnel<T>& r2) const;
     Rationnel<T> operator+() const;
     Rationnel<T> operator-(const Rationnel<T>& r2) const;
@@ -54,17 +50,17 @@ public:
     Rationnel<T> operator/(const Rationnel<T>& r2) const;
     Rationnel<T> operator!() const;
 
-    // Opérateurs d'affectation
+    // Assignment operators
     Rationnel<T>& operator+=(Rationnel<T> r2);
     Rationnel<T>& operator-=(Rationnel<T> r2);
     Rationnel<T>& operator*=(Rationnel<T> r2);
     Rationnel<T>& operator/=(Rationnel<T> r2);
 
-    // Opérateurs de flux
+    // Stream operators
     friend std::ostream& operator<< <T>(std::ostream& os, const Rationnel<T>& r);
     friend std::istream& operator>> <T>(std::istream& is, Rationnel<T>& r);
 
-    // Opérateurs de comparaisons
+    // Comparison operators
     bool operator<(const Rationnel<T>& r) const;
     bool operator<=(const Rationnel<T>& r) const;
     bool operator>(const Rationnel<T>& r) const;
@@ -86,24 +82,24 @@ void Rationnel<T>::simplifie() {
     T gcd = Rationnel<T>::gcd(this->num, this->den);
     this->num /= gcd;
     this->den /= gcd;
-} 
+}
 
 template <typename T>
-Rationnel<T>::Rationnel(): num(0), den(1) {}
+Rationnel<T>::Rationnel() : num(0), den(1) {}
 
 template <typename T>
 Rationnel<T>::Rationnel(T numerateur, T denominateur) : num(numerateur), den(denominateur) {
     if (this->den == 0) {
-        throw std::invalid_argument("Le denominateur est egal à 0, impossible !");
+        throw std::invalid_argument("Denominator is zero, impossible!");
     }
     this->simplifie();
 }
 
-// Opérateurs arithmétiques
+// Arithmetic operators
 template <typename T>
 Rationnel<T> Rationnel<T>::operator+(const Rationnel<T>& r2) const {
     Rationnel<T> cpy = *this;
-    return {cpy+=r2};
+    return {cpy += r2};
 }
 
 template<typename T>
@@ -114,7 +110,7 @@ Rationnel<T> Rationnel<T>::operator+() const {
 template<typename T>
 Rationnel<T> Rationnel<T>::operator-(const Rationnel<T>& r2) const {
     Rationnel<T> cpy = *this;
-    return {cpy-=r2};
+    return {cpy -= r2};
 }
 
 template <typename T>
@@ -126,13 +122,13 @@ Rationnel<T> Rationnel<T>::operator-() const {
 template <typename T>
 Rationnel<T> Rationnel<T>::operator*(const Rationnel<T>& r2) const {
     Rationnel<T> cpy = *this;
-    return {cpy*=r2};
+    return {cpy *= r2};
 }
 
 template <typename T>
 Rationnel<T> Rationnel<T>::operator/(const Rationnel<T>& r2) const {
     Rationnel<T> cpy = *this;
-    return {cpy/=r2};
+    return {cpy /= r2};
 }
 
 template <typename T>
@@ -143,7 +139,7 @@ Rationnel<T> Rationnel<T>::operator!() const {
     return {den, num};
 }
 
-// Opérateurs d'affectation
+// Assignment operators
 template <typename T>
 Rationnel<T>& Rationnel<T>::operator+=(Rationnel<T> r2) {
     if (this->den == r2.den) {
@@ -162,7 +158,6 @@ Rationnel<T>& Rationnel<T>::operator-=(Rationnel<T> r2) {
     return *this += -r2;
 }
 
-
 template <typename T>
 Rationnel<T>& Rationnel<T>::operator*=(Rationnel<T> r2) {
     this->num *= r2.num;
@@ -176,8 +171,7 @@ Rationnel<T>& Rationnel<T>::operator/=(Rationnel<T> r2) {
     return *this *= !r2;
 }
 
-// Opérateurs de flux
-
+// Stream operators
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const Rationnel<T>& r) {
     os << r.num << "/" << r.den;
@@ -192,7 +186,7 @@ std::istream& operator>>(std::istream& is, Rationnel<T>& r) {
     return is;
 }
 
-// Opérateurs de comparaisons
+// Comparison operators
 template <typename T>
 bool Rationnel<T>::operator<(const Rationnel<T>& r) const {
     return this->num * r.den < r.num * this->den;
@@ -223,18 +217,17 @@ bool Rationnel<T>::operator!=(const Rationnel<T>& r) const {
     return !(*this == r);
 }
 
-// Definition des fonctions membres
+// Member function definitions
 template <typename T>
-Rationnel<T> Rationnel<T>::abs() const{
-    if(this->num < 0){
+Rationnel<T> Rationnel<T>::abs() const {
+    if (this->num < 0) {
         return -*this;
-    }
-    else return *this;
+    } else return *this;
 }
 
 template <typename T>
 T Rationnel<T>::gcd(T a, T b) {
-    while(b != 0) {
+    while (b != 0) {
         T t = b;
         b = a % b;
         a = t;
