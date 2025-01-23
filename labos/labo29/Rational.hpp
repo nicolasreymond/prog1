@@ -1,8 +1,8 @@
 /**
- * @file nicolas_reymond_labo27.hpp
- * @brief Headers for the Rationnel class to manipulate rational numbers. Taken from lab 12 but with genericity.
- * @version 0.1
- * @date 19.12.2024
+ * @file Rational.hpp
+ * @brief Headers for the Rational class. Contains the declaration of the class and the stream operators.
+ * @version 1.2
+ * @date 23.01.2025
  * 
  */
 #ifndef RATIONNEL_H

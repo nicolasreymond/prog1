@@ -1,8 +1,8 @@
 /**
- * @file nicolas_reymond_labo26.hpp
- * @brief Int class for manipulating signed integers
- * @version 0.1
- * @date 17.12.2024
+ * @file Int.hpp
+ * @brief Headers for the Int class
+ * @version 1.3
+ * @date 23.01.2025
  * 
  */
 #ifndef Int_H

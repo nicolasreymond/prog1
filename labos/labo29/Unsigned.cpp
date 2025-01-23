@@ -1,8 +1,8 @@
 /**
- * @file nicolas_reymond_labo24.cpp
- * @brief Lab on classes and manipulation of unsigned integers. This file also contains lab 25.
+ * @file Unsigned.cpp
+ * @brief Implementation of the Unsigned class and the Setbase class. Overloads the operators for the Unsigned class.
  * @version 0.1
- * @date 02.12.2024
+ * @date 23.01.2025
  * 
  */
 #include "Unsigned.hpp"

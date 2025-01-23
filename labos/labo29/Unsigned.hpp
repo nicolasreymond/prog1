@@ -1,8 +1,8 @@
 /**
- * @file nicolas_reymond_labo24.hpp
- * @brief Headers for the classes used in labs 24 and 25
+ * @file Unsigned.hpp
+ * @brief Headers for the Unsigned class and the Setbase class to manipulate unsigned numbers.
  * @version 0.1
- * @date 02.12.2024
+ * @date 23.01.2025
  * 
  */
 #ifndef Unsigned_H

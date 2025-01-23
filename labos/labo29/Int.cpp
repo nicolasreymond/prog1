@@ -1,8 +1,8 @@
 /**
- * @file nicolas_reymond_labo26.cpp
- * @brief Lab on classes and manipulation of signed integers
- * @version 0.1
- * @date 17.12.2024
+ * @file Int.cpp
+ * @brief Implementation of the Int class
+ * @version 1.3
+ * @date 23.01.2025
  * 
  */
 #include "Int.hpp"
