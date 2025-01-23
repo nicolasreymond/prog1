@@ -138,9 +138,11 @@ void solveSystem(vector<vector<T>>& matrix) {
             swap(matrix[i], matrix[pivot_row]);
         }
 
-        if (matrix[i][i] != T(0)) {
-            pivote(matrix, i, i);
+        if (matrix[i][i] == T(0)) {
+            throw runtime_error("Matrix is singular and cannot be solved.");
         }
+
+        pivote(matrix, i, i);
     }
 }
 
@@ -194,7 +196,13 @@ int main(int argc, char** argv) {
         cout << "Matrix read: " << endl << t2 << endl;
         solveSystem(t2);
         displaySolution(t2);
-    } catch (exception& e) {
+    } catch (const ifstream::failure& e) {
+        cerr << "File error: " << e.what() << endl;
+        return 1;
+    } catch (const runtime_error& e) {
+        cerr << "Runtime error: " << e.what() << endl;
+        return 1;
+    } catch (const exception& e) {
         cerr << "Error: " << e.what() << endl;
         return 1;
     }
