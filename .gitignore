@@ -1,6 +1,9 @@
 # Accept .hpp
 !*.hpp
 
+# Accept all Readme.md
+!*.md
+
 # Ignore PRG1_Recueil_Exercices
 PRG1_*
 
@@ -47,8 +50,7 @@ labo0/
 *.kml
 
 # Ignore resume folder but not main.pdf and .tex
-resume/*.*
-# resume/
-!resume/**/*.pdf
+resume/
+!resume/main.pdf
 !resume/*.tex
 
