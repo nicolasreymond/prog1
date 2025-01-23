@@ -6,7 +6,7 @@ using namespace std;
 
 
 template <typename T>
-void pivote(vector<vector<T>>& t, size_t ligne, size_t colonne){
+void pivot(vector<vector<T>>& t, size_t ligne, size_t colonne){
     size_t nb_lignes = t.size();
     size_t nb_colonnes = t[0].size();
 
@@ -56,7 +56,7 @@ int main(void){
         size_t i, j;
         cin >> i >> j;
         if (i < nb_lignes and j < nb_colonnes and t2[i][j] != 0.0)
-            pivote(t2, i, j);
+            pivot(t2, i, j);
         else
             cout << "pivot non valide!\n";
     }

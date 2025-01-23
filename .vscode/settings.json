@@ -87,5 +87,6 @@
             "binaryPath": "/home/nreymond/dev/heig-vd/prog1/exercises/X_exam",
             "binaryArgs": []
         }
-    ]
+    ],
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }

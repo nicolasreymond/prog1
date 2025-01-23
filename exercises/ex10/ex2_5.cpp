@@ -1,6 +1,6 @@
 /**
  * @file tri_generique.cpp
- * @author Nolan Evard (nolan.evard@heig-vd.ch)
+ * @author Nicolas Reymond (nicolas.reymond@heig-vd.ch)
  * @brief
  * @version 0.1
  * @date 21.11.2024

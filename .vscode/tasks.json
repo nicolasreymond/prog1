@@ -6,14 +6,16 @@
 			"label": "C/C++: g++ build active file",
 			"command": "/usr/bin/g++",
 			"args": [
-				"-fdiagnostics-color=always",
-				"-g",
-				"${file}",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"labos/labo29/main.out",
+				"labos/labo29/Int.cpp",
+				"labos/labo29/Unsigned.cpp",
+				"labos/labo29/Rational.cpp",
+				"labos/labo29/Reymond_labo29.cpp",
+				"-g"
 			],
 			"options": {
-				"cwd": "${fileDirname}"
+				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [
 				"$gcc"

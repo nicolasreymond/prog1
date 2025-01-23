@@ -6,7 +6,7 @@
                 "${workspaceFolder}/**",
                 "/usr/include",
                 "/usr/local/include",
-                "/usr/include/gtest" // Add this line
+                "/usr/include/gtest"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
