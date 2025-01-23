@@ -63,23 +63,24 @@ void pivote(vector<vector<T>>& matrix, size_t ligne, size_t colonne) {
  * @param nomFichier File containing the matrix
  * @return vector<vector<Rat>> Matrix read from the file
  */
-vector<vector<Rat>> readMatrix(const string& nomFichier) {
+template <typename T>
+vector<vector<T>> readMatrix(const string& nomFichier) {
     ifstream fichier(nomFichier);
     if (!fichier.is_open()) {
         throw runtime_error("Impossible to open the file!");
     }
 
-    vector<vector<Rat>> matrice;
+    vector<vector<T>> matrice;
     string ligne;
     while (getline(fichier, ligne)) {
         if (ligne.empty()) continue;
         istringstream iss(ligne);
-        vector<Rat> ligne_matrice;
+        vector<T> ligne_matrice;
         string valeur;
         while (getline(iss, valeur, ' ')) {
             if (valeur.empty()) continue;
-            Int temp(stoi(valeur));
-            ligne_matrice.push_back(Rat(temp));
+            T temp(stoi(valeur));
+            ligne_matrice.push_back(temp);
         }
         matrice.push_back(ligne_matrice);
     }
@@ -93,7 +94,8 @@ vector<vector<Rat>> readMatrix(const string& nomFichier) {
  * @param matrix Matrix to solve
  * @return vector<size_t> Order of pivots
  */
-vector<size_t> definePivots(const vector<vector<Rat>>& matrice) {
+template <typename T>
+vector<size_t> definePivots(const vector<vector<T>>& matrice) {
     size_t nb_lignes = matrice.size();
     vector<size_t> pivots;
     pivots.push_back(0);
@@ -119,7 +121,8 @@ vector<size_t> definePivots(const vector<vector<Rat>>& matrice) {
  * 
  * @param matrix Matrix to solve
  */
-void solveSystem(vector<vector<Rat>>& matrix) {
+template <typename T>
+void solveSystem(vector<vector<T>>& matrix) {
     size_t nb_lignes = matrix.size();
     size_t nb_colonnes = matrix[0].size();
 
@@ -135,7 +138,7 @@ void solveSystem(vector<vector<Rat>>& matrix) {
             swap(matrix[i], matrix[pivot_row]);
         }
 
-        if (matrix[i][i] != Rat(0)) {
+        if (matrix[i][i] != T(0)) {
             pivote(matrix, i, i);
         }
     }
@@ -146,7 +149,8 @@ void solveSystem(vector<vector<Rat>>& matrix) {
  * 
  * @param matrice Solved matrix
  */
-void displaySolution(const vector<vector<Rat>>& matrice) {
+template <typename T>
+void displaySolution(const vector<vector<T>>& matrice) {
     for (size_t i = 0; i < matrice.size(); ++i) {
         cout << "x" << i << " = " << setprecision(3) << fixed << matrice[i].back() << endl;
     }
@@ -186,7 +190,7 @@ int main(int argc, char** argv) {
 
     string nomFichier = argv[1];
     try {
-        vector<vector<Rat>> t2 = readMatrix(nomFichier);
+        vector<vector<Rat>> t2 = readMatrix<Rat>(nomFichier);
         cout << "Matrix read: " << endl << t2 << endl;
         solveSystem(t2);
         displaySolution(t2);
